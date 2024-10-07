@@ -24,7 +24,7 @@
                     <!-- <img src="{{ asset('img/terra2.png') }}" alt="Terra" class="absolute"> -->
                 </div>
                 <div class="pt-16"></div>
-                <button type="button" class="text-white bg-[#7289da] hover:bg-[#5f73ba]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-1.5 text-center inline-flex items-center me-2 mb-2">
+                <button type="button" class="text-white bg-nord9 hover:bg-nord10 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-1.5 text-center inline-flex items-center me-2 mb-2">
                     <img src="{{ asset('img/discord.svg') }}" alt="" class="drop-shadow-l w-4 h-4 me-2">
                     <a
                         href="{{ route('login') }}"
