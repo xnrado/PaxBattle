@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImageViewController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\Route;
@@ -30,3 +31,7 @@ Route::get('/battles', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 });
+
+Route::get('/images/{img}', [ImageViewController::class,'img'])->name('images');
+
+//$url = route('profile');
