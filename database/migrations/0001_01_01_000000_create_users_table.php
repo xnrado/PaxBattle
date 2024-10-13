@@ -14,13 +14,19 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('username');
-            $table->string('discriminator');
+            $table->string('global_name')->nullable();
+            $table->string('discriminator')->nullable();
             $table->string('email')->nullable()->unique();
             $table->string('avatar')->nullable();
-            $table->boolean('verified');
+            $table->boolean('verified')->nullable();
+            $table->string('banner')->nullable();
+            $table->string('banner_color')->nullable();
+            $table->string('accent_color')->nullable();
             $table->string('locale');
             $table->boolean('mfa_enabled');
-            $table->string('refresh_token')->nullable();
+            $table->string('premium_type')->nullable();
+            $table->string('public_flags')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
 

@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->rememberToken();
+        Schema::create('inventories', function (Blueprint $table) {
+            $table->unsignedBigInteger('item_id');
+            $table->unsignedBigInteger('country_id');
+            $table->double('quantity');
+            $table->timestamps();
+            $table->primary(array('item_id', 'country_id'));
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropRememberToken();
-        });
+        Schema::dropIfExists('inventories');
     }
 };

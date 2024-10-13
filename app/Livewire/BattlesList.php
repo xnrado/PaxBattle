@@ -6,11 +6,11 @@ use Livewire\Component;
 
 class BattlesList extends Component
 {
-    public $battles
+    public $battles;
 
     public function mount()
     {
-        $this->battles = Transaction::
+        //$this->battles = Transaction::
     }
 
     public function render()

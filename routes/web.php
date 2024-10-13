@@ -67,7 +67,7 @@ Route::get('/battles', function () {
         [
             'battle_id' => 1,
             'battle_title' => 'Bitwa Kizgadzka',
-            'battle_image' => 'nord.jpg',
+            'battle_image' => 'nord.webp',
             'battle_countries' => [
                 [
                     'country_image' => 'karbadia.png',
@@ -86,7 +86,7 @@ Route::get('/battles', function () {
         [
             'battle_id' => 2,
             'battle_title' => 'Bitwa Nordycka',
-            'battle_image' => 'pagan.jpg',
+            'battle_image' => 'pagan.webp',
             'battle_countries' => [
                 [
                     'country_image' => 'karbadia.png',
@@ -106,7 +106,7 @@ Route::get('/battles', function () {
         [
             'battle_id' => 3,
             'battle_title' => 'Bitwa Słowiańska',
-            'battle_image' => 'viking.png',
+            'battle_image' => 'viking.webp',
             'battle_countries' => [
                 [
                     'country_image' => 'karbadia.png',
