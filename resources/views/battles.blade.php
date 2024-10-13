@@ -7,44 +7,34 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-nord-1 text-nord-6 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-nord-2 text-nord-6 overflow-hidden shadow-sm sm:rounded-lg">
+{{--                {{ Http::withHeaders([--}}
+{{--                'Authorization' => env('DISCORD_API_AUTH')--}}
+{{--                ])->get('https://discordapp.com/api/guilds/917078941213261914/members?limit=3') }}--}}
                 <div class="p-6 grid grid-cols-3 gap-3">
-                    <div class="bg-amber-200 min-h-64 px-8">
-                        <div class="bg-amber-600 h-48"></div>
-                        <div class="truncate text-2xl accent-nord-6">Bitwa Kizgadzko-Nordycka</div>
-                        <div class="grid grid-cols-5">
-                            <div class="bg-[#2A6B11] h-8 flex gap-1 justify-center align-middle">
-                                <img class="max-h-full max-w-full" alt="Karbadia" src="https://i.imgur.com/LT2l15E.png">
+                    @foreach($battles as $battle)
+                        <div class="bg-nord-2 min-h-64 px-8">
+                            <div class="h-48 flex justify-center items-center">
+                                <img alt="{{ $battle['battle_image'] }}" src="{{asset('storage/img/battles/'.$battle["battle_image"])}}">
                             </div>
-                            <div class="bg-[#2A6B99] h-8 flex gap-1 col-span-4">
-                                Karbadia
-                            </div>
+                            <div class="truncate text-2xl accent-nord-6">{{ $battle['battle_title'] }}</div>
+
+                            @foreach($battle['battle_countries'] as $country)
+                                <div style="background-color: {{ $country['country_color'].'80' }}; color: {{ $country['text_color'] }}" class="mt-1 rounded">
+                                    <div class="grid grid-cols-5 h-full">
+                                        <div class="flex justify-center align-middle h-8 p-0.5">
+                                            <img class="max-h-full max-w-full drop-shadow-2xl" alt="{{ $country['country_image'] }}" src="storage/img/countries/{{ $country['country_image'] }}">
+                                        </div>
+                                        <div class="h-8 flex gap-1 col-span-4 items-center">
+                                            {{$country['country_name']}}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+
                         </div>
-                        <div class="grid grid-cols-5">
-                            <div class="bg-[#2A6B11] h-8 flex gap-1 justify-center align-middle">
-                                <img class="max-h-full max-w-full" alt="Karbadia" src="https://i.imgur.com/LT2l15E.png">
-                            </div>
-                            <div class="bg-[#2A6B99] h-8 flex gap-1 col-span-4">
-                                Karbadia
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-5">
-                            <div class="bg-[#2A6B11] h-8 flex gap-1 justify-center align-middle">
-                                <img class="max-h-full max-w-full" alt="Karbadia" src="https://i.imgur.com/LT2l15E.png">
-                            </div>
-                            <div class="bg-[#2A6B99] h-8 flex gap-1 col-span-4">
-                                Karbadia
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-blue-200">02</div>
-                    <div class="bg-amber-200">03</div>
-                    <div class="bg-blue-200">04</div>
-                    <div class="bg-amber-200">05</div>
-                    <div class="bg-blue-200">06</div>
-                    <div class="bg-amber-200">07</div>
-                    <div class="bg-blue-200">08</div>
-                    <div class="bg-amber-200">09</div>
+                    @endforeach
+
                 </div>
             </div>
         </div>

@@ -20,12 +20,12 @@
             <div class="relative flex flex-col items-center w-full max-w-2xl px-6 lg:max-w-xl">
 
                 <div class="relative flex lg:justify-center lg:col-start-2">
-                    <img src="{{ asset('img/terra.png') }}" alt="Terra" class="drop-shadow-l">
+                    <img src="{{ asset('storage/img/terra.png') }}" alt="Terra" class="drop-shadow-l">
                     <!-- <img src="{{ asset('img/terra2.png') }}" alt="Terra" class="absolute"> -->
                 </div>
                 <div class="pt-16"></div>
                 <button type="button" class="text-white bg-nord9 hover:bg-nord10 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-1.5 text-center inline-flex items-center me-2 mb-2">
-                    <img src="{{ asset('img/discord.svg') }}" alt="" class="drop-shadow-l w-4 h-4 me-2">
+                    <img src="{{ asset('storage/img/discord.svg') }}" alt="" class="drop-shadow-l w-4 h-4 me-2">
                     <a
                         href="{{ route('login') }}"
                         class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
