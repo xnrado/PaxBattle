@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+//use App\Models\
 
 class BattlesList extends Component
 {
@@ -10,7 +11,7 @@ class BattlesList extends Component
 
     public function mount()
     {
-        //$this->battles = Transaction::
+        //$this->battles =
     }
 
     public function render()

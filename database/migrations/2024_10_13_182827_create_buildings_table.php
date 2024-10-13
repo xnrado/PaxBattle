@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('country_buildings', function (Blueprint $table) {
+        Schema::create('building_template_country', function (Blueprint $table) {
             $table->unsignedBigInteger('country_id');
             $table->unsignedBigInteger('building_template_id');
             $table->timestamps();
@@ -36,18 +36,11 @@ return new class extends Migration
             $table->primary(array('province_id', 'building_template_id'));
         });
 
-        Schema::create('building_costs', function (Blueprint $table) {
+        Schema::create('building_template_item', function (Blueprint $table) {
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('building_template_id');
-            $table->double('quantity');
-            $table->timestamps();
-            $table->primary(array('item_id', 'building_template_id'));
-        });
-
-        Schema::create('building_productions', function (Blueprint $table) {
-            $table->unsignedBigInteger('item_id');
-            $table->unsignedBigInteger('building_template_id');
-            $table->double('quantity');
+            $table->double('build_cost');
+            $table->double('production');
             $table->timestamps();
             $table->primary(array('item_id', 'building_template_id'));
         });
@@ -64,8 +57,6 @@ return new class extends Migration
 
         Schema::dropIfExists('buildings');
 
-        Schema::dropIfExists('building_costs');
-
-        Schema::dropIfExists('building_productions');
+        Schema::dropIfExists('building_template_item');
     }
 };

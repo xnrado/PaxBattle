@@ -31,7 +31,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('country_units', function (Blueprint $table) {
+        Schema::create('country_unit_template', function (Blueprint $table) {
             $table->unsignedBigInteger('country_id');
             $table->unsignedBigInteger('unit_template_id');
             $table->timestamps();
@@ -56,23 +56,16 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('unit_costs', function (Blueprint $table) {
+        Schema::create('item_unit_template', function (Blueprint $table) {
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('unit_template_id');
-            $table->double('quantity');
+            $table->double('recruitment_cost');
+            $table->double('maintenance_cost');
             $table->timestamps();
             $table->primary(array('item_id', 'unit_template_id'));
         });
 
-        Schema::create('unit_maintenances', function (Blueprint $table) {
-            $table->unsignedBigInteger('item_id');
-            $table->unsignedBigInteger('unit_template_id');
-            $table->double('quantity');
-            $table->timestamps();
-            $table->primary(array('item_id', 'unit_template_id'));
-        });
-
-        Schema::create('levy_units', function (Blueprint $table) {
+        Schema::create('building_template_unit_template', function (Blueprint $table) {
             $table->unsignedBigInteger('building_template_id');
             $table->unsignedBigInteger('unit_template_id');
             $table->double('conscript_quantity');
@@ -88,15 +81,13 @@ return new class extends Migration
     {
         Schema::dropIfExists('unit_templates');
 
-        Schema::dropIfExists('country_units');
+        Schema::dropIfExists('country_unit_template');
 
         Schema::dropIfExists('units');
 
-        Schema::dropIfExists('unit_costs');
+        Schema::dropIfExists('item_unit');
 
-        Schema::dropIfExists('unit_maintenances');
-
-        Schema::dropIfExists('levy_units');
+        Schema::dropIfExists('building_template_unit_template');
     }
 
 

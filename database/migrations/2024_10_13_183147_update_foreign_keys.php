@@ -34,11 +34,11 @@ return new class extends Migration
             $table->foreign('province_id')->references('id')->on('provinces');
             $table->foreign('province_id_2')->references('id')->on('provinces');
         });
-        Schema::table('inventories', function (Blueprint $table) {
+        Schema::table('country_item', function (Blueprint $table) {
             $table->foreign('country_id')->references('id')->on('countries');
             $table->foreign('item_id')->references('id')->on('items');
         });
-        Schema::table('country_units', function (Blueprint $table) {
+        Schema::table('country_unit_template', function (Blueprint $table) {
             $table->foreign('country_id')->references('id')->on('countries');
             $table->foreign('unit_template_id')->references('id')->on('unit_templates');
         });
@@ -48,22 +48,14 @@ return new class extends Migration
             $table->foreign('province_id')->references('id')->on('provinces');
             $table->foreign('origin_id')->references('id')->on('provinces');
         });
-        Schema::table('unit_costs', function (Blueprint $table) {
-            $table->foreign('unit_template_id')->references('id')->on('unit_templates');
-            $table->foreign('item_id')->references('id')->on('items');
-        });
-        Schema::table('unit_maintenances', function (Blueprint $table) {
-            $table->foreign('unit_template_id')->references('id')->on('unit_templates');
-            $table->foreign('item_id')->references('id')->on('items');
-        });
-        Schema::table('levy_units', function (Blueprint $table) {
+        Schema::table('building_template_unit_template', function (Blueprint $table) {
             $table->foreign('unit_template_id')->references('id')->on('unit_templates');
             $table->foreign('building_template_id')->references('id')->on('building_templates');
         });
         Schema::table('movement_orders', function (Blueprint $table) {
             //
         });
-        Schema::table('country_buildings', function (Blueprint $table) {
+        Schema::table('building_template_country', function (Blueprint $table) {
             $table->foreign('country_id')->references('id')->on('countries');
             $table->foreign('building_template_id')->references('id')->on('building_templates');
         });
@@ -71,15 +63,11 @@ return new class extends Migration
             $table->foreign('province_id')->references('id')->on('provinces');
             $table->foreign('building_template_id')->references('id')->on('building_templates');
         });
-        Schema::table('building_costs', function (Blueprint $table) {
+        Schema::table('building_template_item', function (Blueprint $table) {
             $table->foreign('item_id')->references('id')->on('items');
             $table->foreign('building_template_id')->references('id')->on('building_templates');
         });
-        Schema::table('building_productions', function (Blueprint $table) {
-            $table->foreign('item_id')->references('id')->on('items');
-            $table->foreign('building_template_id')->references('id')->on('building_templates');
-        });
-        Schema::table('terrain_modifiers', function (Blueprint $table) {
+        Schema::table('building_template_terrain', function (Blueprint $table) {
             $table->foreign('terrain_id')->references('id')->on('terrains');
             $table->foreign('building_template_id')->references('id')->on('building_templates');
         });
