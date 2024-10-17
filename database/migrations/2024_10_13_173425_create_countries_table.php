@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('credo')->nullable();
             $table->string('credo_image')->nullable();
             $table->integer('channel')->nullable();
+            $table->boolean('is_visible');
             $table->timestamps();
         });
     }

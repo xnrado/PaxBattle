@@ -78,6 +78,65 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('players', function (Blueprint $table) {
+            $table->dropForeign('country_id');
+        });
+        Schema::table('countries', function (Blueprint $table) {
+            $table->dropForeign('religion_id');
+            $table->dropForeign('province_id');
+        });
+        Schema::table('religions', function (Blueprint $table) {
+            $table->dropForeign('province_id');
+        });
+        Schema::table('provinces', function (Blueprint $table) {
+            $table->dropForeign('region_id');
+            $table->dropForeign('terrain_id');
+            $table->dropForeign('item_id');
+            $table->dropForeign('country_id');
+            $table->dropForeign('controller_id');
+            $table->dropForeign('religion_id');
+            $table->dropForeign('level_id');
+        });
+        Schema::table('borders', function (Blueprint $table) {
+            $table->dropForeign('province_id');
+            $table->dropForeign('province_id_2');
+        });
+        Schema::table('country_item', function (Blueprint $table) {
+            $table->dropForeign('country_id');
+            $table->dropForeign('item_id');
+        });
+        Schema::table('country_unit_template', function (Blueprint $table) {
+            $table->dropForeign('country_id');
+            $table->dropForeign('unit_template_id');
+        });
+        Schema::table('units', function (Blueprint $table) {
+            $table->dropForeign('unit_template_id');
+            $table->dropForeign('country_id');
+            $table->dropForeign('province_id');
+            $table->dropForeign('origin_id');
+        });
+        Schema::table('building_template_unit_template', function (Blueprint $table) {
+            $table->dropForeign('unit_template_id');
+            $table->dropForeign('building_template_id');
+        });
+        Schema::table('movement_orders', function (Blueprint $table) {
+            //
+        });
+        Schema::table('building_template_country', function (Blueprint $table) {
+            $table->dropForeign('country_id');
+            $table->dropForeign('building_template_id');
+        });
+        Schema::table('buildings', function (Blueprint $table) {
+            $table->dropForeign('province_id');
+            $table->dropForeign('building_template_id');
+        });
+        Schema::table('building_template_item', function (Blueprint $table) {
+            $table->dropForeign('item_id');
+            $table->dropForeign('building_template_id');
+        });
+        Schema::table('building_template_terrain', function (Blueprint $table) {
+            $table->dropForeign('terrain_id');
+            $table->dropForeign('building_template_id');
+        });
     }
 };
