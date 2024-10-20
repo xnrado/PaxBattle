@@ -17,7 +17,7 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('battles')" :active="request()->routeIs('battles')">
+                    <x-nav-link :href="route('battles.index')" :active="request()->routeIs('battles')">
                         {{ __('Bitwy') }}
                     </x-nav-link>
                 </div>

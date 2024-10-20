@@ -14,75 +14,8 @@ class BattlesList extends Component
     public function mount()
     {
         \React\Promise\Timer\sleep(1);
-        $this->battles = Battle::with('player', 'country')->where('player_id', '=', Auth::id());
-        dd($this->battles);
-//        $this->battles = [
-//            [
-//                'battle_id' => 1,
-//                'battle_title' => 'Bitwa Kizgadzka',
-//                'battle_image' => 'nord.webp',
-//                'battle_countries' => [
-//                    [
-//                        'country_image' => 'karbadia.png',
-//                        'country_name' => 'Karbadia',
-//                        'country_color' => '#2A6B11',
-//                        'text_color' => getContrastColor('#2A6B11')
-//                    ],
-//                    [
-//                        'country_image' => 'neuord.png',
-//                        'country_name' => 'Neuord Drakonis',
-//                        'country_color' => '#7F1B10',
-//                        'text_color' => getContrastColor('#7F1B10')
-//                    ]
-//                ]
-//            ],
-//            [
-//                'battle_id' => 2,
-//                'battle_title' => 'Bitwa Nordycka',
-//                'battle_image' => 'pagan.webp',
-//                'battle_countries' => [
-//                    [
-//                        'country_image' => 'karbadia.png',
-//                        'country_name' => 'Karbadia',
-//                        'country_color' => '#2A6B11',
-//                        'text_color' => getContrastColor('#2A6B11')
-//                    ],
-//                    [
-//                        'country_image' => 'neuord.png',
-//                        'country_name' => 'Neuord Drakonis',
-//                        'country_color' => '#7F1B10',
-//                        'text_color' => getContrastColor('#7F1B10')
-//                    ]
-//
-//                ]
-//            ],
-//            [
-//                'battle_id' => 3,
-//                'battle_title' => 'Bitwa Słowiańska',
-//                'battle_image' => 'viking.webp',
-//                'battle_countries' => [
-//                    [
-//                        'country_image' => 'karbadia.png',
-//                        'country_name' => 'Karbadia',
-//                        'country_color' => '#2A6B11',
-//                        'text_color' => getContrastColor('#2A6B11')
-//                    ],
-//                    [
-//                        'country_image' => 'neuord.png',
-//                        'country_name' => 'Neuord Drakonis',
-//                        'country_color' => '#7F1B10',
-//                        'text_color' => getContrastColor('#7F1B10')
-//                    ],
-//                    [
-//                        'country_image' => 'sylvania.webp',
-//                        'country_name' => 'Nieumarli',
-//                        'country_color' => '#AEDAED',
-//                        'text_color' => getContrastColor('#AEDAED')
-//                    ]
-//
-//                ]
-//            ]
-//        ];
+        $this->battles = Battle::with('player', 'country')->whereRelation('player', 'id', '=', Auth::id())->get();
+
     }
 
     public function placeholder()

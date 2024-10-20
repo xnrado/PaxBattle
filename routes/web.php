@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\ImageViewController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BattleOverviewController;
 use App\Models\Battle;
 use App\Models\Player;
+use App\Models\Province;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -23,23 +25,43 @@ Route::get('/', function () {
     return view('index');
 })->middleware(RedirectIfAuthenticated::class);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-Route::get('/battles', function () {
-    $id = Auth::id();
-    $battles = Battle::with('player', 'country')->whereRelation('player', 'id', '=', Auth::id())->get();
-
-    dd($battles);
-
-    return view('battles');
-})->middleware(['auth'])->name('battles');
-
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        $provinces = Province::all();
+        return view('dashboard', ['provinces' => $provinces]);
+    })->name('dashboard');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+
+    Route::post('/battles', function () {
+        return request()->all();
+    });
+    Route::get('/battles', function () {
+        return view('battles.index');
+    })->name('battles.index');
+    Route::get('/battles/create', function () {
+        return view('battles.create');
+    })->name('battles.create');
+    Route::get('/battles/{id}', [BattleOverviewController::class, 'show'])->name('battles.show');
+
+    Route::get('/images/{img}', [ImageViewController::class, 'img'])->name('images');
+
+
 });
 
-Route::get('/images/{img}', [ImageViewController::class,'img'])->name('images');
+
+
+//Route::get('/battles', function () {
+//    return view('battles.index');
+//})->middleware(['auth'])->name('battles.index');
+//
+//Route::get('/battles/create', function () {
+//    return view('battles.create');
+//})->middleware(['auth'])->name('battles.create');
+//
+//Route::get('/battles/{id}', [BattleOverviewController::class, 'show'])->name('battles.show');
+//
+//Route::get('/images/{img}', [ImageViewController::class, 'img'])->name('images');
+
 
 //$url = route('profile');

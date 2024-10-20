@@ -57,7 +57,7 @@ return [
     |
     */
 
-    'redirect_uri' => env('APP_URL', 'http://localhost:8000') . '/' . env('LARASCORD_PREFIX', 'larascord') . '/callback',
+    'redirect_uri' => env('LARASCORD_APP_URL', 'http://localhost:8000') . '/' . env('LARASCORD_PREFIX', 'larascord') . '/callback',
 
     /*
     |--------------------------------------------------------------------------
