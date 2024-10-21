@@ -4,6 +4,7 @@ use App\Http\Controllers\ImageViewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BattleOverviewController;
 use App\Models\Battle;
+use App\Models\Country;
 use App\Models\Player;
 use App\Models\Province;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
@@ -21,6 +22,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/test', function () {
+    return Country::with('player')->get();
+});
+
 Route::get('/', function () {
     return view('index');
 })->middleware(RedirectIfAuthenticated::class);
@@ -33,9 +38,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 
-    Route::post('/battles', function () {
-        return request()->all();
-    });
     Route::get('/battles', function () {
         return view('battles.index');
     })->name('battles.index');
@@ -43,6 +45,10 @@ Route::middleware('auth')->group(function () {
         return view('battles.create');
     })->name('battles.create');
     Route::get('/battles/{id}', [BattleOverviewController::class, 'show'])->name('battles.show');
+
+    Route::get('/countries', function () {
+        return view('countries.index');
+    })->name('countries.index');
 
     Route::get('/images/{img}', [ImageViewController::class, 'img'])->name('images');
 

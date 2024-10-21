@@ -24,6 +24,7 @@ return new class extends Migration
             $table->char('color', 6);
             $table->boolean('has_coast');
             $table->double('pops');
+            $table->text('svg');
             $table->integer('x_coordinate');
             $table->integer('y_coordinate');
             $table->timestamps();
