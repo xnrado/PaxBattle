@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('religion_id')->nullable();
             $table->unsignedBigInteger('level_id');
             $table->string('name');
+            $table->string('slug')->unique();
             $table->char('color', 6);
             $table->boolean('has_coast');
             $table->double('pops');

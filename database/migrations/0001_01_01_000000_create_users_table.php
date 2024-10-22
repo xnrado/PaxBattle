@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('premium_type')->nullable();
             $table->string('public_flags')->nullable();
             $table->rememberToken();
+            $table->unsignedBigInteger('country_id')->nullable();
             $table->timestamps();
         });
 

@@ -22,10 +22,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', function () {
-    return Country::with('player')->get();
-});
-
 Route::get('/', function () {
     return view('index');
 })->middleware(RedirectIfAuthenticated::class);
@@ -55,6 +51,7 @@ Route::middleware('auth')->group(function () {
 
 });
 
+Route::post('/battles', []);
 
 
 //Route::get('/battles', function () {

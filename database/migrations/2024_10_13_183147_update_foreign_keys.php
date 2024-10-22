@@ -78,7 +78,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('players', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropForeign('country_id');
         });
         Schema::table('countries', function (Blueprint $table) {

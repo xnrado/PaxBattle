@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('religions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug')->unique();
             $table->string('head')->nullable();
             $table->unsignedBigInteger('province_id')->comment('religion capital')->nullable();
             $table->char('color', 6);
