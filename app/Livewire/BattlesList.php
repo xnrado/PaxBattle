@@ -5,20 +5,19 @@ namespace App\Livewire;
 use App\Models\Battle;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use App\Models\Province;
+use Illuminate\View\View;
 
 class BattlesList extends Component
 {
     public $battles;
 
-    public function mount()
+    public function mount(): void
     {
-        \React\Promise\Timer\sleep(1);
-        $this->battles = Battle::with('player', 'country')->whereRelation('player', 'id', '=', Auth::id())->get();
+        $this->battles = Battle::with('user', 'country')->whereRelation('user', 'id', '=', Auth::id())->get();
 
     }
 
-    public function placeholder()
+    public function placeholder(): string
     {
         return <<<'HTML'
         <div class="block">
@@ -28,7 +27,7 @@ class BattlesList extends Component
         HTML;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.battles-list');
     }

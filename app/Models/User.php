@@ -75,6 +75,6 @@ class User extends Authenticatable
     }
     public function battle(): BelongsToMany
     {
-        return $this->belongsToMany(Battle::class, 'battle_country_player');
+        return $this->belongsToMany(Battle::class, 'battle_country_user');
     }
 }

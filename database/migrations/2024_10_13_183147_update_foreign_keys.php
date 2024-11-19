@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('players', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->foreign('country_id')->references('id')->on('countries');
         });
         Schema::table('countries', function (Blueprint $table) {

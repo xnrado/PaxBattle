@@ -17,12 +17,12 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('battles.index')" :active="request()->routeIs('battles')">
+                    <x-nav-link :href="route('battles.index')" :active="request()->routeIs('battles.index')">
                         {{ __('Bitwy') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('countries.index')" :active="request()->routeIs('countries')">
+                    <x-nav-link :href="route('countries.index')" :active="request()->routeIs('countries.index')">
                         {{ __('Kraje') }}
                     </x-nav-link>
                 </div>

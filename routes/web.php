@@ -2,10 +2,7 @@
 
 use App\Http\Controllers\ImageViewController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\BattleOverviewController;
-use App\Models\Battle;
-use App\Models\Country;
-use App\Models\Player;
+use App\Http\Controllers\BattleController;
 use App\Models\Province;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +37,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/battles/create', function () {
         return view('battles.create');
     })->name('battles.create');
-    Route::get('/battles/{id}', [BattleOverviewController::class, 'show'])->name('battles.show');
 
     Route::get('/countries', function () {
         return view('countries.index');
@@ -50,8 +46,9 @@ Route::middleware('auth')->group(function () {
 
 
 });
-
-Route::post('/battles', []);
+Route::get('/battles/{slug}', [BattleController::class, 'show'])->name('battles.show');
+Route::get('/battles/{slug}/moves', [BattleController::class, 'moves'])->name('battles.moves');
+Route::post('/battles/{slug}/move', [BattleController::class, 'move'])->name('battles.move');
 
 
 //Route::get('/battles', function () {

@@ -14,8 +14,7 @@ class CountriesList extends Component
     public function mount()
     {
         \React\Promise\Timer\sleep(1);
-//        $this->countries = Battle::with('player', 'country')->whereRelation('player', 'id', '=', Auth::id())->get();
-        $this->countries = Country::with('player')->get();
+        $this->countries = Country::with('user')->get();
 
     }
 

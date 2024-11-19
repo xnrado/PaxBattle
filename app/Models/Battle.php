@@ -10,12 +10,12 @@ class Battle extends Model
 {
     use HasFactory;
 
-    public function player(): BelongsToMany
+    public function user(): BelongsToMany
     {
-        return $this->belongsToMany(Player::class, 'battle_country_player');
+        return $this->belongsToMany(User::class, 'battle_country_user');
     }
     public function country(): BelongsToMany
     {
-        return $this->belongsToMany(Country::class, 'battle_country_player');
+        return $this->belongsToMany(Country::class, 'battle_country_user');
     }
 }

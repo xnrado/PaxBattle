@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('image');
-            $table->unsignedTinyInteger('movement');
+            $table->unsignedTinyInteger('map_movement');
+            $table->unsignedTinyInteger('battle_movement');
             $table->unsignedInteger('max_manpower')->comment('if is_singular, then max_hp');
             $table->unsignedTinyInteger('range')->unsigned();
             $table->json('weapon_skill');

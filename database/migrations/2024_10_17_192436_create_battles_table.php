@@ -36,12 +36,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('battle_player', function (Blueprint $table) {
-            $table->dropForeign('battle_country_player_battle_id_foreign');
-            $table->dropForeign('battle_country_player_player_id_foreign');
-            $table->dropForeign('battle_country_player_country_id_foreign');
+        Schema::table('battle_user', function (Blueprint $table) {
+            $table->dropForeign('battle_country_user_battle_id_foreign');
+            $table->dropForeign('battle_country_user_user_id_foreign');
+            $table->dropForeign('battle_country_user_country_id_foreign');
         });
-        Schema::dropIfExists('battle_country_player');
+        Schema::dropIfExists('battle_country_user');
         Schema::dropIfExists('battles');
     }
 };
