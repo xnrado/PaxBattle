@@ -1,12 +1,12 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-nord-6 leading-tight">
-            {{ __('Tworzenie Bitwy') }}
-        </h2>
-    </x-slot>
+{{--    <x-slot name="header">--}}
+{{--        <h2 class="font-semibold text-xl text-nord-6 leading-tight">--}}
+{{--            {{ __('Tworzenie Bitwy') }}--}}
+{{--        </h2>--}}
+{{--    </x-slot>--}}
 
-    <div class="grid grid-cols-2 px-32 py-16">
-        <form class="px-24" method="POST" action="/battles">
+    <div class="my-10 mx-auto max-w-screen-md px-8">
+        <form class="" method="POST" action="/battles">
             @csrf
             <div class="space-y-12">
                 <div class="border-b pb-12">

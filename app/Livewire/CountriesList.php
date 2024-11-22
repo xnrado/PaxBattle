@@ -2,23 +2,21 @@
 
 namespace App\Livewire;
 
-use App\Models\Battle;
 use App\Models\Country;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\View\View;
 
 class CountriesList extends Component
 {
     public $countries;
 
-    public function mount()
+    public function mount(): void
     {
-        \React\Promise\Timer\sleep(1);
         $this->countries = Country::with('user')->get();
 
     }
 
-    public function placeholder()
+    public function placeholder(): string
     {
         return <<<'HTML'
         <div class="block">
@@ -27,7 +25,7 @@ class CountriesList extends Component
         </div>
         HTML;
     }
-    public function render()
+    public function render(): View
     {
         return view('livewire.countries-list');
     }

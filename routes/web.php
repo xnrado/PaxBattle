@@ -23,6 +23,10 @@ Route::get('/', function () {
     return view('index');
 })->middleware(RedirectIfAuthenticated::class);
 
+Route::get('/dev', function () {
+    return view('login-dev');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         $provinces = Province::all();

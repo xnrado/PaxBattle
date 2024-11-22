@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="d8243651-a4e1-4e84-b8f7-62968b6421f3" name="Linux">
+        <fileTransfer rootFolder="/home/xnrad/PaxBattle" accessType="SFTP" host="192.168.192.121" port="22" sshConfigId="434ac77a-0376-4a24-910b-f7d430e29b26" sshConfig="xnrad@192.168.192.121:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
