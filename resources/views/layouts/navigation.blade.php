@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-nord-2 border-b border-nord-1">
+<nav x-data="{ open: false }" class="bg-nord-dark border-b border-nord-1">
     <!-- Primary Navigation Menu -->
     <header>
         <div class="">
@@ -28,6 +28,13 @@
                         </x-nav-link>
                     </div>
                 </div>
+                @isset($header)
+                    <header class="flex justify-center">
+                        <h2 class="flex align-middle items-center font-semibold text-l text-nord-6 leading-tight">
+                            {{ $header }}
+                        </h2>
+                    </header>
+                @endisset
 
                 <!-- Settings Dropdown -->
                 <div class="hidden sm:flex sm:items-center sm:ml-6">

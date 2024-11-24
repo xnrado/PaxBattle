@@ -3,7 +3,7 @@
         <div class="bg-nord-2 min-h-64 px-8">
             <a href="/countries/{{ $country->id }}">
                 <div  class="h-48 flex justify-center items-center group">
-                    <img alt="{{ asset('storage/img/countries/Unknown.png') }}" src="{{asset('storage/img/countries/'.$country["image"])}}" class="duration-300 ease-in-out group-hover:scale-105 max-w-full max-h-full">
+                    <img alt="{{ $country['name'] }}" src="{{asset('storage/img/countries/'.$country['image'])}}" class="duration-300 ease-in-out group-hover:scale-105 max-w-full max-h-full">
                 </div>
             </a>
             <div class="truncate text-2xl accent-nord-6">{{ $country->name }}</div>

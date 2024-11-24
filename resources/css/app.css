@@ -5,3 +5,21 @@
 .custom:hover {
     fill: #2563eb !important;
 }
+
+@keyframes grid-container-animation {
+    from {
+        width: 192px;
+        height: 192px;
+    }
+    to {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.grid-container {
+    animation-name: grid-container-animation;
+    animation-duration: 0.5s;
+    max-width: 100%;
+    background: #2e3440;
+}

@@ -11,6 +11,12 @@ export default {
 
     theme: {
         extend: {
+            colors: {
+                transpartent: 'transparent',
+                current: 'currentColor',
+                'nord-comment': '#abb9cf',
+                'nord-dark': '#242933',
+            },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
@@ -33,6 +39,7 @@ export default {
 
     plugins: [
         require('@tailwindcss/forms'),
+        require('tailwindcss-animated'),
         require('tailwind-nord'),
     ],
 };

@@ -14,11 +14,8 @@ class CountryItemTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
-        \DB::table('country_item')->delete();
-        
-        
-        
+
+
     }
 }

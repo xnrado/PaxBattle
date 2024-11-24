@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/battles/create', function () {
         return view('battles.create');
     })->name('battles.create');
+    Route::post('/battles', [BattleController::class, 'store'])->name('battles.store');
 
     Route::get('/countries', function () {
         return view('countries.index');

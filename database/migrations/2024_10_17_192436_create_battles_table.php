@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
         });
@@ -36,7 +36,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('battle_user', function (Blueprint $table) {
+        Schema::table('battle_country_user', function (Blueprint $table) {
             $table->dropForeign('battle_country_user_battle_id_foreign');
             $table->dropForeign('battle_country_user_user_id_foreign');
             $table->dropForeign('battle_country_user_country_id_foreign');

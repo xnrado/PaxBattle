@@ -18,6 +18,29 @@ class BattleController extends Controller
         ]);
     }
 
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('img/battles', 'public');
+        } else {
+            $imagePath = null;
+        }
+
+        Battle::create([
+            'name' => $validatedData['name'],
+            'description' => $validatedData['description'],
+            'image' => $imagePath,
+        ]);
+
+        return redirect()->route('battles.create')->with('success', 'Battle created!');
+    }
+
     public function moves(): JsonResponse
     {
         $battle_moves = BattleMove::with('battle', 'user')->get()->append('time');

@@ -9,7 +9,7 @@ trait GenerateUniqueSlugTrait
     public static function bootGenerateUniqueSlugTrait(): void
     {
         static::saving(function ($model) {
-            $slug = $model->slug;
+            $slug = Str::of($model->name)->slug('-');
             $model->slug = $model->generateUniqueSlug($slug);
         });
     }

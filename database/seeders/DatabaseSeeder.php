@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
 //            'name' => 'Test User',
 //            'email' => 'test@example.com',
 //        ]);
+        $this->call(NukeSeeder::class);
         $this->call(RegionsTableSeeder::class);
         $this->call(TerrainsTableSeeder::class);
         $this->call(ItemsTableSeeder::class);
@@ -27,5 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ProvincesTableSeeder::class);
         $this->call(CountriesTableSeeder::class);
         $this->call(CountryItemTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
 }
