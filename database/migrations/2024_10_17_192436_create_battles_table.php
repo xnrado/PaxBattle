@@ -17,17 +17,16 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('description')->nullable();
             $table->string('image')->nullable();
+            $table->integer('x_size')->check('x_size != 0');
+            $table->integer('y_size')->check('y_size != 0');
             $table->timestamps();
         });
 
         Schema::create('battle_country_user', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('country_id');
-            $table->unsignedBigInteger('battle_id');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('country_id')->constrained();
+            $table->foreignId('battle_id')->constrained();
             $table->primary(array('user_id', 'country_id', 'battle_id'));
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('country_id')->references('id')->on('countries');
-            $table->foreign('battle_id')->references('id')->on('battles');
         });
     }
 

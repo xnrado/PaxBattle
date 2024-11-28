@@ -9,13 +9,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Battle extends Model
 {
+
     use HasFactory;
 
     use GenerateUniqueSlugTrait;
 
     protected $fillable = [
         'name',
-        'slug',
         'description',
         'image'
     ];

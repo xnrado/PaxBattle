@@ -17,6 +17,30 @@ class BattleController extends Controller
             'battle' => Battle::query()->where('slug', $slug)->firstOrFail(),
         ]);
     }
+    public function map($slug): View
+    {
+        return view('battles.map', [
+            'battle' => Battle::query()->where('slug', $slug)->firstOrFail(),
+        ]);
+    }
+    public function armies($slug): View
+    {
+        return view('battles.armies', [
+            'battle' => Battle::query()->where('slug', $slug)->firstOrFail(),
+        ]);
+    }
+    public function actions($slug): View
+    {
+        return view('battles.actions', [
+            'battle' => Battle::query()->where('slug', $slug)->firstOrFail(),
+        ]);
+    }
+    public function options($slug): View
+    {
+        return view('battles.options', [
+            'battle' => Battle::query()->where('slug', $slug)->firstOrFail(),
+        ]);
+    }
 
     public function store(Request $request)
     {

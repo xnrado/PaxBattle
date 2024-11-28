@@ -8,12 +8,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Country extends Model
 {
-    public function user(): HasMany
+    public function users(): HasMany
     {
         return $this->hasMany(User::class);
     }
-    public function battle(): BelongsToMany
+    public function battles(): BelongsToMany
     {
         return $this->belongsToMany(Battle::class, 'battle_country_user');
+    }
+    public function battle_users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'battle_country_user');
     }
 }

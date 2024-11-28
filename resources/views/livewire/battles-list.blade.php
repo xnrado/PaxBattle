@@ -1,7 +1,7 @@
 <div class="grid-container">
     <div class="p-6 grid grid-cols-3 gap-3">
         @foreach($battles as $battle)
-            <div class="bg-nord-2 min-h-64 px-8 animate-fade-up animate-delay-75 animate-once">
+            <div class="bg-nord-2 min-h-64 px-8 animate-fade-up animate-duration-500 animate-delay-500 animate-once">
                 <a href="/battles/{{ $battle->slug }}">
                     <div  class="h-48 flex justify-center items-center group">
                         <img alt="{{ $battle->slug }}" src="{{asset('storage/'.$battle->image)}}" class="duration-300 ease-in-out group-hover:scale-105 max-w-full max-h-full">

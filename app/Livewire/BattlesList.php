@@ -13,7 +13,6 @@ class BattlesList extends Component
 
     public function mount(): void
     {
-        \React\Promise\Timer\sleep(1);
         $this->battles = Battle::with('user', 'country')->whereRelation('user', 'id', '=', Auth::id())->get();
 
     }
