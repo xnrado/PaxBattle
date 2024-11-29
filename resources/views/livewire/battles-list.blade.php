@@ -1,4 +1,4 @@
-<div class="grid-container">
+<div class="w-full grid-container">
     <div class="p-6 grid grid-cols-3 gap-3">
         @foreach($battles as $battle)
             <div class="bg-nord-2 min-h-64 px-8 animate-fade-up animate-duration-500 animate-delay-500 animate-once">

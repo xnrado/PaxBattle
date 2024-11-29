@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Storage;
                     <img src="{{ asset('storage/img/discord.svg') }}" alt="" class="drop-shadow-l w-4 h-4 me-2">
                     <a
                         href="{{ route('login') }}"
-                        class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                        class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20]"
                     >
                         Sign in with Discord
                     </a>
@@ -41,7 +41,7 @@ use Illuminate\Support\Facades\Storage;
 
                 <main class="mt-6">
                     @if (session()->has('error'))
-                        <div class="dark:bg-red-800/20 rounded-lg p-4 mb-4 text-sm mt-16" style="color: rgba(247, 0, 0, 0.7); background-color: white; padding: 15px 15px; margin: 2rem;" role="alert">
+                        <div class="rounded-lg p-4 mb-4 text-sm mt-16" style="color: rgba(247, 0, 0, 0.7); background-color: white; padding: 15px 15px; margin: 2rem;" role="alert">
                             <svg style="display: inline-flex; width: 2rem;" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
 
                             <span class="font-medium">
@@ -51,7 +51,7 @@ use Illuminate\Support\Facades\Storage;
                     @endif
 
                     @if (session()->has('success'))
-                        <div class="dark:bg-red-800/20 rounded-lg p-4 mb-4 text-sm mt-16" style="color: rgba(70, 255, 0, 1); background-color: white; padding: 15px 15px; margin: 2rem;" role="alert">
+                        <div class="rounded-lg p-4 mb-4 text-sm mt-16" style="color: rgba(70, 255, 0, 1); background-color: white; padding: 15px 15px; margin: 2rem;" role="alert">
                             <svg style="display: inline-flex; width: 2rem;" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
 
                             <span class="font-medium">

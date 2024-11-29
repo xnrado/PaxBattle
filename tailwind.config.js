@@ -7,15 +7,30 @@ export default {
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        './node_modules/flowbite/**/*.js',
     ],
 
     theme: {
         extend: {
             colors: {
-                transpartent: 'transparent',
-                current: 'currentColor',
                 'nord-comment': '#abb9cf',
                 'nord-dark': '#242933',
+                'nord-0': '#2e3440',
+                'nord-1': '#3b4252',
+                'nord-2': '#434c5e',
+                'nord-3': '#4c566a',
+                'nord-4': '#d8dee9',
+                'nord-5': '#e5e9f0',
+                'nord-6': '#eceff4',
+                'nord-7': '#8fbcbb',
+                'nord-8': '#88c0d0',
+                'nord-9': '#81a1c1',
+                'nord-10': '#5e81ac',
+                'nord-11': '#bf616a',
+                'nord-12': '#d08770',
+                'nord-13': '#ebcb8b',
+                'nord-14': '#a3be8c',
+                'nord-15': '#b48ead',
             },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
@@ -40,6 +55,6 @@ export default {
     plugins: [
         require('@tailwindcss/forms'),
         require('tailwindcss-animated'),
-        require('tailwind-nord'),
+        require('flowbite/plugin'),
     ],
 };
