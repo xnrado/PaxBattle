@@ -39,7 +39,7 @@ class BattlesTableSeeder extends Seeder
                     'slug' => 'bitwa-kizgadzka',
                     'description' => 'Starcie zbrojne, które miało miejsce 10 listopada 1444 roku między oddziałami polsko-węgierskimi oraz innymi wojskami koalicji antytureckiej.',
                     'image' => 'img/battles/pagan.webp',
-                    'x_size' => '500',
+                    'x_size' => '50',
                     'y_size' => '100',
                     'created_at' => now(),
                     'updated_at' => now(),

@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Storage;
 
 </head>
 <body>
-<div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-nord0 py-6 sm:py-12">
+<div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-nord-0 py-6 sm:py-12">
     <div class="relative flex bg-nord1 px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-xl sm:rounded-lg sm:px-10">
         <div class="relative flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
             <div class="relative flex flex-col items-center w-full max-w-2xl px-6 lg:max-w-xl">
@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Storage;
                     <img src="{{ asset('storage/img/terra.png' ) }}" alt="Terra" class="drop-shadow-l">
                 </div>
                 <div class="pt-16"></div>
-                <button type="button" class="text-white bg-nord9 hover:bg-nord10 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-1.5 text-center inline-flex items-center me-2 mb-2">
+                <button type="button" class="text-white bg-nord-9 hover:bg-nord-10 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-1.5 text-center inline-flex items-center me-2 mb-2">
                     <img src="{{ asset('storage/img/discord.svg') }}" alt="" class="drop-shadow-l w-4 h-4 me-2">
                     <a
                         href="{{ route('login') }}"

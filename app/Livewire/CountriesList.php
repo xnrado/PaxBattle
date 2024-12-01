@@ -12,7 +12,7 @@ class CountriesList extends Component
 
     public function mount(): void
     {
-        $this->countries = Country::with('user')->get();
+        $this->countries = Country::with('users')->get();
 
     }
 
