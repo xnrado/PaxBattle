@@ -3,17 +3,18 @@
 namespace App\Livewire;
 
 use App\Models\Battle;
+use App\Models\Side;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\View\View;
 
-class BattlesList extends Component
+class ArmiesList extends Component
 {
-    public $battles;
+    public $sides;
 
     public function mount(): void
     {
-        $this->battles = Battle::with('user', 'country', 'side')->whereRelation('user', 'id', '=', Auth::id())->get();
+        $this->sides = Side::with('battle')->whereRelation('battle', 'id', '=', Auth::id())->get();
     }
 
     public function placeholder(): string

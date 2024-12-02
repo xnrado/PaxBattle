@@ -19,6 +19,23 @@ class BattlesTableSeeder extends Seeder
 
         \DB::table('battles')->delete();
 
+        \DB::table('sides')->delete();
+
+        \DB::table('sides')->insert(array (
+            0 =>
+                array (
+                    'id' => 1,
+                    'name' => 'Armia Wschód',
+                    'color' => '2A6B11',
+                ),
+            1 =>
+                array (
+                    'id' => 2,
+                    'name' => 'Armia Czerwona',
+                    'color' => '2A6B11',
+                ),
+        ));
+
         \DB::table('battles')->insert(array (
             0 =>
                 array (
@@ -47,8 +64,10 @@ class BattlesTableSeeder extends Seeder
         ));
 
         $user = User::query()->find(381473729290698752);
-        $user->battles()->attach(1, ['country_id' => 1]);
-        $user->battles()->attach(2, ['country_id' => 1]);
+        $user->battles()->attach(1, ['country_id' => 1, 'side_id' => 1]);
+        $user->battles()->attach(2, ['country_id' => 1, 'side_id' => 2]);
+        $user = User::query()->find(751909872890675291);
+        $user->battles()->attach(2, ['country_id' => 2, 'side_id' => 2]);
 
 
     }

@@ -28,4 +28,8 @@ class Battle extends Model
     {
         return $this->belongsToMany(Country::class, 'battle_country_user');
     }
+    public function side(): BelongsToMany
+    {
+        return $this->belongsToMany(Side::class, 'battle_country_user', );
+    }
 }

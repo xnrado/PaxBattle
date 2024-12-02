@@ -22,10 +22,18 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create('sides', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->char('color',6);
+            $table->timestamps();
+        });
+
         Schema::create('battle_country_user', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained();
             $table->foreignId('country_id')->constrained();
             $table->foreignId('battle_id')->constrained();
+            $table->foreignId('side_id')->constrained();
             $table->primary(array('user_id', 'country_id', 'battle_id'));
         });
     }

@@ -8,7 +8,6 @@
                     </div>
                 </a>
                 <div class="truncate text-2xl accent-nord-6">{{ $battle->name }}</div>
-
                 @for ($i = 0; $i < count($battle->country); $i++)
                     <div class="grid grid-cols-5 my-1 px-[3%] dmt-1 rounded text-gray-300 hover:text-nord-6 transition ease-in-out overflow-hidden" style="background: linear-gradient(90deg, {{ '#'.$battle->country[$i]->color }} 3%, #3b4252 3%, #3b4252 97%, {{ ($battle->user[$i]->id === Auth::id() ? '#5e81ac' : '#3b4252') }} 97%)">
                         <div class="row-span-1 flex justify-center align-middle h-8 p-0.5">
@@ -18,6 +17,7 @@
                             {{ $battle->country[$i]->name }}
                         </div>
                     </div>
+{{--                    <span>{{ $battle->side }}</span>--}}
                 @endfor
             </div>
         @endforeach
