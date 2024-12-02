@@ -8,3 +8,7 @@ Broadcast::channel('chat.battle.{id}', function ($user, $id) {
     return !is_null($battle);
     // return (int) $user->id === (int) $id;
 });
+
+Broadcast::channel('test', function () {
+    return true;
+});

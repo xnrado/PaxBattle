@@ -6,6 +6,8 @@ export const BASE_CONFIG: GameConfig = {
         { h: new CubeVector(1, 1, -2), variant: 0 },
         { h: new CubeVector(2, 3, -5), variant: 0 },
         { h: new CubeVector(3, 3, -6), variant: 0 },
+        { h: new CubeVector(3, 4, -7), variant: 0 },
+        { h: new CubeVector(4, 3, -7), variant: 0 },
         { h: new CubeVector(4, 4, -8), variant: 0 },
         { h: new CubeVector(2, 4, -6), variant: 0 },
     ],
