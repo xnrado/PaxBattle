@@ -17,7 +17,6 @@
                             {{ $battle->country[$i]->name }}
                         </div>
                     </div>
-{{--                    <span>{{ $battle->side }}</span>--}}
                 @endfor
             </div>
         @endforeach

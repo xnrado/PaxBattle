@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Jakyeru\Larascord\Traits\InteractsWithDiscord;
+use Spatie\Permission\Traits\HasRoles;
 
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, InteractsWithDiscord;
+    use HasFactory, Notifiable, InteractsWithDiscord, HasRoles;
 
     /**
      * The attributes that are mass assignable.

@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\View\View;
 
-class ArmiesList extends Component
+class BattleArmiesList extends Component
 {
-    public $sides;
+    public $battle;
 
-    public function mount(): void
+    public function mount($slug): void
     {
-        $this->sides = Side::with('battle')->whereRelation('battle', 'id', '=', Auth::id())->get();
+        $this->battle = Battle::with('user', 'country', 'side')->where('slug', '=', $slug)->first();
     }
 
     public function placeholder(): string
@@ -29,6 +29,6 @@ class ArmiesList extends Component
 
     public function render(): View
     {
-        return view('livewire.battles-list');
+        return view('livewire.battle-armies-list');
     }
 }
