@@ -19,8 +19,8 @@ return new class extends Migration
             $table->char('color', 6);
             $table->string('ruler')->nullable();
             $table->string('government')->nullable();
-            $table->unsignedBigInteger('religion_id');
-            $table->unsignedBigInteger('province_id')->comment('capital');
+            $table->foreignId('religion_id');
+            $table->foreignId('province_id')->comment('capital');
             $table->string('bio_url');
             $table->string('image');
             $table->string('credo')->nullable();

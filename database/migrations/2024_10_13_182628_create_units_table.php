@@ -33,18 +33,18 @@ return new class extends Migration
         });
 
         Schema::create('country_unit_template', function (Blueprint $table) {
-            $table->unsignedBigInteger('country_id');
-            $table->unsignedBigInteger('unit_template_id');
+            $table->foreignId('country_id');
+            $table->foreignId('unit_template_id');
             $table->timestamps();
             $table->primary(array('country_id', 'unit_template_id'));
         });
 
         Schema::create('units', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('unit_template_id');
-            $table->unsignedBigInteger('country_id')->comment('unit controller');
-            $table->unsignedBigInteger('province_id')->comment('unit province position');
-            $table->unsignedBigInteger('origin_id')->comment('unit province origin');
+            $table->foreignId('unit_template_id');
+            $table->foreignId('country_id')->comment('unit controller');
+            $table->foreignId('province_id')->comment('unit province position');
+            $table->foreignId('origin_id')->comment('unit province origin');
             $table->unsignedInteger('army_id');
             $table->string('name');
             $table->string('army_name');
@@ -58,8 +58,8 @@ return new class extends Migration
         });
 
         Schema::create('item_unit_template', function (Blueprint $table) {
-            $table->unsignedBigInteger('item_id');
-            $table->unsignedBigInteger('unit_template_id');
+            $table->foreignId('item_id');
+            $table->foreignId('unit_template_id');
             $table->double('recruitment_cost');
             $table->double('maintenance_cost');
             $table->timestamps();
@@ -67,8 +67,8 @@ return new class extends Migration
         });
 
         Schema::create('building_template_unit_template', function (Blueprint $table) {
-            $table->unsignedBigInteger('building_template_id');
-            $table->unsignedBigInteger('unit_template_id');
+            $table->foreignId('building_template_id');
+            $table->foreignId('unit_template_id');
             $table->double('conscript_quantity');
             $table->timestamps();
             $table->primary(array('building_template_id', 'unit_template_id'));

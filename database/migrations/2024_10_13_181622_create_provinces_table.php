@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('provinces', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('region_id');
-            $table->unsignedBigInteger('terrain_id');
-            $table->unsignedBigInteger('item_id')->nullable()->comment('trade good');
-            $table->unsignedBigInteger('country_id')->nullable();
-            $table->unsignedBigInteger('controller_id')->nullable();
-            $table->unsignedBigInteger('religion_id')->nullable();
-            $table->unsignedBigInteger('level_id');
+            $table->foreignId('region_id');
+            $table->foreignId('terrain_id');
+            $table->foreignId('item_id')->nullable()->comment('trade good');
+            $table->foreignId('country_id')->nullable();
+            $table->foreignId('controller_id')->nullable();
+            $table->foreignId('religion_id')->nullable();
+            $table->foreignId('level_id');
             $table->string('name');
             $table->string('slug')->unique();
             $table->char('color', 6);
@@ -65,8 +65,8 @@ return new class extends Migration
         });
 
         Schema::create('borders', function (Blueprint $table) {
-            $table->unsignedBigInteger('province_id');
-            $table->unsignedBigInteger('province_id_2');
+            $table->foreignId('province_id');
+            $table->foreignId('province_id_2');
             $table->tinyInteger('type');
             $table->timestamps();
             $table->primary(array('province_id', 'province_id_2'));

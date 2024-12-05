@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('head')->nullable();
-            $table->unsignedBigInteger('province_id')->comment('religion capital')->nullable();
+            $table->foreignId('province_id')->comment('religion capital')->nullable();
             $table->char('color', 6);
             $table->text('bio_url');
             $table->text('image');

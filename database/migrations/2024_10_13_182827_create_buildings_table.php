@@ -22,23 +22,23 @@ return new class extends Migration
         });
 
         Schema::create('building_template_country', function (Blueprint $table) {
-            $table->unsignedBigInteger('country_id');
-            $table->unsignedBigInteger('building_template_id');
+            $table->foreignId('country_id');
+            $table->foreignId('building_template_id');
             $table->timestamps();
             $table->primary(array('country_id', 'building_template_id'));
         });
 
         Schema::create('buildings', function (Blueprint $table) {
-            $table->unsignedBigInteger('province_id');
-            $table->unsignedBigInteger('building_template_id');
+            $table->foreignId('province_id');
+            $table->foreignId('building_template_id');
             $table->unsignedInteger('quantity');
             $table->timestamps();
             $table->primary(array('province_id', 'building_template_id'));
         });
 
         Schema::create('building_template_item', function (Blueprint $table) {
-            $table->unsignedBigInteger('item_id');
-            $table->unsignedBigInteger('building_template_id');
+            $table->foreignId('item_id');
+            $table->foreignId('building_template_id');
             $table->double('build_cost');
             $table->double('production');
             $table->timestamps();

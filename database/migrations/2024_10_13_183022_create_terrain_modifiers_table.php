@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('building_template_terrain', function (Blueprint $table) {
-            $table->unsignedBigInteger('terrain_id');
-            $table->unsignedBigInteger('building_template_id');
+            $table->foreignId('terrain_id');
+            $table->foreignId('building_template_id');
             $table->tinyInteger('throughput_modifier')->default(1);
             $table->tinyInteger('input_modifier')->default(1);
             $table->tinyInteger('output_modifier')->default(1);

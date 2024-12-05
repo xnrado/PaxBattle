@@ -1,5 +1,5 @@
-// import './bootstrap';
-// import 'flowbite';
+import './bootstrap';
+import 'flowbite';
 // import './battle/map';
 import './echo';
 import sort from '@alpinejs/sort';

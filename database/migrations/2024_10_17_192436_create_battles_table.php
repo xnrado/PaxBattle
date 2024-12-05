@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('description')->nullable();
             $table->string('image')->nullable();
-            $table->integer('x_size')->check('x_size != 0');
-            $table->integer('y_size')->check('y_size != 0');
+            $table->foreignId('province_id')->constrained();
+            $table->integer('x_size')->unsigned();
+            $table->integer('y_size')->unsigned();
             $table->timestamps();
         });
 
