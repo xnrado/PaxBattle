@@ -23,3 +23,39 @@
     max-width: 100%;
     background: #2e3440;
 }
+
+.alert {
+    position: fixed;
+    top: -5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #abb9cf /*nord-comment*/;
+    color: #2e3440 /*nord-0*/;
+    padding: 10px 20px;
+
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    opacity: 0;
+    animation: popShow 6s 1s 1 alternate;
+
+}
+
+@keyframes popShow {
+    0% {top: -5rem;
+    opacity: 0;}
+    10% {top: 2rem;
+    opacity: 1;}
+    90% {top: 2rem;
+    opacity: 1;}
+    to {top: -5rem;
+    opacity: 0;}
+}
+
+.alert-success{
+    background-color: #a3be8c /*nord-14*/;
+}
+
+.alert-error{
+    background-color: #bf616a /*nord-11*/;
+}

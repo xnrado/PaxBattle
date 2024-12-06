@@ -38,9 +38,13 @@ class CreateBattle extends Component
     {
         $this->validate();
 
-        Battle::create(
-            $this->form->all()
-        );
+        $battle = new Battle();
+        $battle->name = $this->name;
+        $battle->description = $this->description;
+        $battle->province_id = $this->province_id;
+        $battle->x_size = $this->x_size;
+        $battle->y_size = $this->y_size;
+        $battle->save();
 
         session()->flash('status', 'Pomyślnie utworzono bitwę.');
 

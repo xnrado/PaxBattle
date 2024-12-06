@@ -2,7 +2,7 @@
     <x-slot name="header">
         Bitwy
     </x-slot>
-    {{-- If successfully created a battle --}}
+    {{--If successfully created a battle--}}
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}

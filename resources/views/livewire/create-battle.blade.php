@@ -21,7 +21,11 @@
                     <input wire:model.live.debounce.50ms="name" id="name" name="name" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
                 </span>
                 <div>
-                    @error('name') <span>{{ $message }}</span> @enderror
+                    @error('name')
+                    <div class="animate-fade-up animate-duration-100 animate-once">
+                        <span>{{ $message }}</span>
+                    </div>
+                    @enderror
                 </div>
             </div>
             {{-- Description --}}
@@ -35,7 +39,11 @@
                     <input wire:model.live.debounce.50ms="description" id="description" name="description" class="w-full mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
                 </span>
                 <div>
-                    @error('description') <span>{{ $message }}</span> @enderror
+                    @error('description')
+                    <div class="animate-fade-up animate-duration-100 animate-once">
+                        <span>{{ $message }}</span>
+                    </div>
+                    @enderror
                 </div>
             </div>
             {{-- Image --}}
@@ -78,7 +86,11 @@
                         <input wire:model.live.debounce.50ms.lazy="province_id" id="province_id" name="province_id" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
                     </span>
                     <div>
-                        @error('province_id') <span>{{ $message }}</span> @enderror
+                        @error('province_id')
+                        <div class="animate-spin animate-duration-300 animate-thrice">
+                            <span>{{ $message }}</span>
+                        </div>
+                        @enderror
                     </div>
                 </div>
                 {{-- Width --}}
@@ -94,7 +106,11 @@
                             <input wire:model.live.debounce.50ms="x_size" id="x_size" name="x_size" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
                         </span>
                         <div>
-                            @error('x_size') <span>{{ $message }}</span> @enderror
+                            @error('x_size')
+                            <div class="animate-fade-up animate-duration-100 animate-once">
+                                <span>{{ $message }}</span>
+                            </div>
+                            @enderror
                         </div>
                     </div>
                 </div>

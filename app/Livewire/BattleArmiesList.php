@@ -12,7 +12,7 @@ class BattleArmiesList extends Component
 
     public function mount($province_id): void
     {
-        \React\Promise\Timer\sleep(3);
+//        \React\Promise\Timer\sleep(3);
         $this->battle = Battle::with('user', 'country', 'side')->where('province_id', '=', $province_id)->first();
     }
 
