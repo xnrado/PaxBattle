@@ -16,8 +16,8 @@ class Country extends Model
     {
         return $this->belongsToMany(Battle::class, 'battle_country_user');
     }
-    public function battle_users(): BelongsToMany
+    public function armies(): HasMany
     {
-        return $this->belongsToMany(User::class, 'battle_country_user');
+        return $this->hasMany(Army::class);
     }
 }

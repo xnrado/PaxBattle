@@ -14,10 +14,6 @@ class ProvinceLevelsTableSeeder extends Seeder
      */
     public function run()
     {
-
-
-        \DB::table('province_levels')->delete();
-
         \DB::table('province_levels')->insert(array (
             0 =>
             array (

@@ -14,10 +14,6 @@ class TerrainsTableSeeder extends Seeder
      */
     public function run()
     {
-
-
-        \DB::table('terrains')->delete();
-
         \DB::table('terrains')->insert(array (
             0 =>
             array (

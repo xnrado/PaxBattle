@@ -2,18 +2,29 @@
 
 namespace App\Livewire;
 
-use App\Models\Battle;
+use App\Models\Country;
 use Livewire\Component;
 use Illuminate\View\View;
 
 class BattleArmiesList extends Component
 {
-    public $battle;
+    public $countries;
 
     public function mount($province_id): void
     {
-//        \React\Promise\Timer\sleep(3);
-        $this->battle = Battle::with('user', 'country', 'side')->where('province_id', '=', $province_id)->first();
+        $this->countries = Country::whereHas('armies', function ($query) use ($province_id) {
+            $query->where('province_id', $province_id);
+        })
+            ->with([
+                'armies' => function ($query) use ($province_id) {
+                    $query->where('province_id', $province_id)
+                        ->with([
+                            'units.unitTemplate',
+                        ]);
+                },
+            ])
+            ->get();
+//        $this->province = Country::query()->armies->has('province_id', '=' , $province_id)->with(['units.unitTemplate'])->get();
     }
 
     public function placeholder(): string

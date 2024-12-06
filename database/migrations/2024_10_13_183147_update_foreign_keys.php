@@ -42,11 +42,14 @@ return new class extends Migration
             $table->foreign('country_id')->references('id')->on('countries');
             $table->foreign('unit_template_id')->references('id')->on('unit_templates');
         });
-        Schema::table('units', function (Blueprint $table) {
-            $table->foreign('unit_template_id')->references('id')->on('unit_templates');
+        Schema::table('armies', function (Blueprint $table) {
             $table->foreign('country_id')->references('id')->on('countries');
             $table->foreign('province_id')->references('id')->on('provinces');
+        });
+        Schema::table('units', function (Blueprint $table) {
+            $table->foreign('unit_template_id')->references('id')->on('unit_templates');
             $table->foreign('origin_id')->references('id')->on('provinces');
+            $table->foreign('army_id')->references('id')->on('armies');
         });
         Schema::table('building_template_unit_template', function (Blueprint $table) {
             $table->foreign('unit_template_id')->references('id')->on('unit_templates');

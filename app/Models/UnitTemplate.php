@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
-class Province extends Model
+class UnitTemplate extends Model
 {
-    public function armies(): HasMany
+    use HasFactory;
+
+    public function units(): HasMany
     {
-        return $this->hasMany(Army::class, 'province_id');
+        return $this->hasMany(Unit::class);
     }
 }

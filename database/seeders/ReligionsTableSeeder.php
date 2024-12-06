@@ -14,10 +14,6 @@ class ReligionsTableSeeder extends Seeder
      */
     public function run()
     {
-
-
-        \DB::table('religions')->delete();
-
         \DB::table('religions')->insert(array (
             0 =>
             array (

@@ -30,6 +30,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CountryItemTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(BattlesTableSeeder::class);
-        $this->call(BattlefieldsTableSeeder::class);
+        $this->call(UnitTemplatesTableSeeder::class);
+        $this->call(ArmiesTableSeeder::class);
+        $this->call(UnitsTableSeeder::class);
     }
 }

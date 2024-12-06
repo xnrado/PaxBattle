@@ -14,10 +14,6 @@ class ProvincesTableSeeder extends Seeder
      */
     public function run()
     {
-
-
-        \DB::table('provinces')->delete();
-
         \DB::table('provinces')->insert(array (
             0 =>
             array (

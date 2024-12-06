@@ -14,10 +14,6 @@ class ItemsTableSeeder extends Seeder
      */
     public function run()
     {
-
-
-        \DB::table('items')->delete();
-
         \DB::table('items')->insert(array (
             0 =>
             array (

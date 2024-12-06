@@ -28,6 +28,7 @@ return new class extends Migration
             $table->json('ballistic_strength');
             $table->json('toughness');
             $table->string('type');
+            $table->unsignedTinyInteger('vision_range');
             $table->boolean('is_singular');
             $table->timestamps();
         });
@@ -39,19 +40,22 @@ return new class extends Migration
             $table->primary(array('country_id', 'unit_template_id'));
         });
 
+        Schema::create('armies', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('country_id')->comment('army controller');
+            $table->foreignId('province_id')->comment('army province position');
+            $table->string('name');
+            $table->timestamps();
+        });
+
         Schema::create('units', function (Blueprint $table) {
             $table->id();
             $table->foreignId('unit_template_id');
-            $table->foreignId('country_id')->comment('unit controller');
-            $table->foreignId('province_id')->comment('unit province position');
             $table->foreignId('origin_id')->comment('unit province origin');
-            $table->unsignedInteger('army_id');
+            $table->foreignId('army_id');
             $table->string('name');
-            $table->string('army_name');
-            $table->unsignedInteger('max_movement');
             $table->unsignedInteger('left_movement');
             $table->boolean('is_visible');
-            $table->unsignedTinyInteger('vision_range');
             $table->unsignedInteger('manpower')->comment('if is_singular, then hp');
             $table->boolean('is_conscripted');
             $table->timestamps();

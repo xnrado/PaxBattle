@@ -22,8 +22,6 @@ class BattlefieldsTableSeeder extends Seeder
 
     public function run()
     {
-        \DB::table('battlefield_nodes')->delete();
-
         foreach (Battle::all() as $battle) {
             $hexes = array();
             $bottom = $battle->y_size - 1;

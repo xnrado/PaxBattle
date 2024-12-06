@@ -15,12 +15,6 @@ class BattlesTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('battle_country_user')->delete();
-
-        \DB::table('battles')->delete();
-
-        \DB::table('sides')->delete();
-
         \DB::table('sides')->insert(array (
             0 =>
                 array (

@@ -83,7 +83,10 @@
                         </span>
                     </label>
                     <span class="w-full">
-                        <input wire:model.live.debounce.50ms.lazy="province_id" id="province_id" name="province_id" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
+                        <select wire:model.change.lazy="province_id" id="province_id" name="province_id" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm">
+                            <option value=1>Albion (1)</option>
+                            <option value=50>Kanonia (50)</option>
+                        </select>
                     </span>
                     <div>
                         @error('province_id')
