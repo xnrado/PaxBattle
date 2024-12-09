@@ -34,7 +34,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('country_id')->constrained();
             $table->foreignId('battle_id')->constrained();
-            $table->foreignId('side_id')->constrained();
+            $table->foreignId('side_id')->nullable()->constrained();
+            $table->boolean('is_active');
             $table->primary(array('user_id', 'country_id', 'battle_id'));
         });
     }

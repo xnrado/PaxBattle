@@ -60,10 +60,10 @@ class BattlesTableSeeder extends Seeder
         ));
 
         $user = User::query()->find(381473729290698752);
-        $user->battles()->attach(1, ['country_id' => 1, 'side_id' => 1]);
-        $user->battles()->attach(2, ['country_id' => 1, 'side_id' => 2]);
+        $user->battles()->attach(1, ['country_id' => 1, 'side_id' => 1, 'is_active' => 1]);
+        $user->battles()->attach(2, ['country_id' => 1, 'side_id' => 2, 'is_active' => 1]);
         $user = User::query()->find(751909872890675291);
-        $user->battles()->attach(2, ['country_id' => 2, 'side_id' => 2]);
+        $user->battles()->attach(2, ['country_id' => 2, 'side_id' => 2, 'is_active' => 1]);
 
 
     }

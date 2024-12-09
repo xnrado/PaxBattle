@@ -3,29 +3,126 @@
         Dodaj lokalizację bitwy
 
     @else
-        @foreach($countries as $country)
-            {{-- Side --}}
-            <div x-data="{ expanded: true }" class="flex flex-col">
-                <div class="h-14 pb-2 pl-2" style="background: {{ '#'.$country->color }}">
-                    <div class="flex flex-row h-full w-full bg-nord-0">
-                        <div class="px-2 py-2">
-                            <img src="{{ asset('storage/img/sort.svg') }}" alt="Sort" class="drop-shadow-l h-full">
-                        </div>
-                        <h2>{{ $country->name }}</h2>
-                        <div @click="expanded = ! expanded" class="px-2 py-2 transition-transform duration-400" :class="{ 'rotate-90': expanded }">
-                            <img src="{{ asset('storage/img/arrow-right.svg') }}" alt="Toggle" class="drop-shadow-l h-full">
+
+            <div x-sort x-sort:group="sides" class="py-4">
+                {{-- Side --}}
+                <div x-sort:item="1" x-data="{ sideExpanded: true, sideActive: true }" class="flex flex-col">
+                    {{-- SideBar --}}
+                    <div class="pb-2 pl-2" style="background: crimson">
+                        <div class="flex flex-row h-16 w-full" :class="sideActive ? 'bg-nord-0' : 'bg-nord-dark'">
+                            <div x-sort:handle class="px-1 py-2">
+                                <img class="h-full w-auto aspect-square drop-shadow-l" src="{{ asset('storage/img/sort.svg') }}" alt="Sort">
+                            </div>
+
+                            <div class="px-1 py-4">
+                                <input x-model="sideActive" class="h-full w-auto aspect-square" type="checkbox" id="{{ "1" }}" name="side">
+                            </div>
+
+
+                            <h1>{{ "DUMMY_SIDE_NAME" }}</h1>
+                            <button type="button" class="text-sm font-semibold leading-6 text-nord-comment">Edit</button>
+
+
+                            <div @click="sideExpanded = ! sideExpanded" class="px-2 py-2 transition-transform duration-400" :class="{ 'rotate-90': sideExpanded }">
+                                <img class="h-full w-auto aspect-square drop-shadow-l" src="{{ asset('storage/img/arrow-right.svg') }}" alt="Toggle">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div x-show="expanded" x-collapse class="flex flex-col pl-4 bg-nord-10">
-                    <div class="bg-nord-0 gap-4">
-                        <div class="bg-nord-0">
-                            {{ $country }}
+                    {{-- Countries --}}
+                    <div x-show="sideExpanded" x-collapse class="flex flex-col pl-2 bg-nord-10" style="background: crimson">
+                        <div class="gap-4" :class="sideActive ? 'bg-nord-0' : 'bg-nord-dark'">
+                            <div x-sort x-sort:group="countries">
+                                {{-- Country --}}
+                                @foreach($countries as $country)
+                                <div x-sort:item="{{$country->id}}" x-data="{ countryExpanded: true }" class="flex flex-col">
+                                    {{-- CountryBar --}}
+                                    <div class="flex flex-row w-full h-14 pl-4" :class="$wire.countriesActive[{{$country->id}}] ? '' : 'bg-nord-dark'">
+                                        <div x-sort:handle class="px-1 py-2">
+                                            <img class="h-full w-auto aspect-square drop-shadow-l" src="{{ asset('storage/img/sort.svg') }}" alt="Sort">
+                                        </div>
+
+                                        <div class="px-1 py-3">
+                                            <input wire:model.change="countriesActive.{{$country->id}}" class="h-full w-auto aspect-square" type="checkbox" id="{{ $country->id }}" name="country">
+                                        </div>
+
+                                        <div class="px-1 py-1">
+                                            <img class="h-full w-auto drop-shadow-l" src="{{ asset('storage/'.$country->image) }}" alt="{{ $country->slug }}" >
+                                        </div>
+
+                                        <h2>{{ $country->name }}</h2>
+
+                                        <div @click="countryExpanded = ! countryExpanded" class="px-2 py-2 transition-transform duration-400" :class="{ 'rotate-90': countryExpanded }">
+                                            <img class="h-full w-auto drop-shadow-l" src="{{ asset('storage/img/arrow-right.svg') }}" alt="Toggle">
+                                        </div>
+                                    </div>
+                    {{-- Armies --}}
+                    <div x-sort x-sort:group="country-{{$country->id}}" x-show="countryExpanded" x-collapse class="flex flex-col">
+                        {{-- Army --}}
+                        @foreach($country->armies as $army)
+                        <div x-sort:item="{{$army->id}}" x-data="{ armyExpanded: true }" class="flex flex-col">
+                            {{-- ArmyBar --}}
+                            <div class="flex flex-row h-12 pl-12" :class="$wire.countriesActive[{{$country->id}}] && $wire.armiesActive[{{$army->id}}] ? '' : 'bg-nord-dark'">
+                                <div x-sort:handle class="px-1 py-2">
+                                    <img class="h-full w-auto aspect-square drop-shadow-l" src="{{ asset('storage/img/sort.svg') }}" alt="Sort" >
+                                </div>
+
+                                <div class="px-1 py-3">
+                                    <input  wire:model.change="armiesActive.{{$army->id}}" class="h-full w-auto aspect-square" type="checkbox" value="{{ $army->id }}">
+                                </div>
+
+                                <h3>{{ $army->name }}</h3>
+
+                                <div @click="armyExpanded = ! armyExpanded" class="px-2 py-2 w-12 transition-transform duration-400" :class="{ 'rotate-90': armyExpanded }">
+                                    <img src="{{ asset('storage/img/arrow-right.svg') }}" alt="Toggle" class="drop-shadow-l h-full">
+                                </div>
+                            </div>
+                    {{-- Units --}}
+                    <div x-sort x-sort:group="army-{{$army->id}}" x-show="armyExpanded" x-collapse class="flex flex-col">
+                        @foreach($army->units as $unit)
+                        <div x-sort:item="{{$army->id}}" x-data="{ unitManpower: {{ $unit->manpower }}, unitMaxManpower: {{$unit->unit_template->max_manpower}} }" class="flex flex-col">
+                            {{-- UnitBar --}}
+                            <div class="relative flex flex-row h-12 pl-20" :class="$wire.countriesActive[{{$country->id}}] && $wire.armiesActive[{{$army->id}}] && $wire.unitsActive[{{$unit->id}}] ? '' : 'bg-nord-dark'">
+
+                                <div x-sort:handle class="px-1 py-2">
+                                    <img class="h-full w-auto aspect-square drop-shadow-l" src="{{ asset('storage/img/sort.svg') }}" alt="Sort">
+                                </div>
+
+                                <div class="px-1 py-3">
+                                    <input id="{{ $unit->id }}" wire:model.change="unitsActive.{{$unit->id}}" type="checkbox" class="h-full w-auto aspect-square">
+                                </div>
+
+                                <div class="px-1 py-1">
+                                    <img class="h-full w-auto drop-shadow-l" src="{{ asset('storage/'.$unit->unit_template->image) }}" alt="{{ $country->slug }}" >
+                                </div>
+
+                                <div>
+                                    <h4>{{ $unit->name }}</h4>
+                                    <span class="text-nord-comment">{{ $unit->unit_template->name }}</span>
+                                </div>
+
+                                <span x-text="unitManpower"></span><span>/</span><span x-text="unitMaxManpower"></span>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                        </div>
+                        @endforeach
+                    </div>
+                                </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        @endforeach
+
+            <div x-sort x-sort:group="sides" class="py-4">
+            Bez frakcji
+                <div x-sort x-sort:group="countries">
+
+                </div>
+            </div>
+
 {{--            <div x-sort x-sort:group="army" class="bg-nord-12 w-full h-40">--}}
 {{--                @foreach($province->army as $country)--}}
 {{--                    <div x-sort:item class="py-3 px-6 rounded-3xl font-medium" style="background: {{ '#'.$country->color }}">--}}
@@ -33,5 +130,6 @@
 {{--                    </div>--}}
 {{--                @endforeach--}}
 {{--            </div>--}}
+
     @endif
 </div>

@@ -10,7 +10,7 @@ class Unit extends Model
 {
     use HasFactory;
 
-    public function unitTemplate(): BelongsTo
+    public function unit_template(): BelongsTo
     {
         return $this->belongsTo(UnitTemplate::class);
     }

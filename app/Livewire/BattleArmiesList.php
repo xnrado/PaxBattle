@@ -9,6 +9,9 @@ use Illuminate\View\View;
 class BattleArmiesList extends Component
 {
     public $countries;
+    public $countriesActive = array();
+    public $armiesActive = array();
+    public $unitsActive = array();
 
     public function mount($province_id): void
     {
@@ -19,16 +22,47 @@ class BattleArmiesList extends Component
                 'armies' => function ($query) use ($province_id) {
                     $query->where('province_id', $province_id)
                         ->with([
-                            'units.unitTemplate',
+                            'units.unit_template',
                         ]);
                 },
             ])
             ->get();
-//        $this->province = Country::query()->armies->has('province_id', '=' , $province_id)->with(['units.unitTemplate'])->get();
+
+        foreach ($this->countries as $country) {
+            $this->countriesActive[$country->id] = true;
+            foreach ($country->armies as $army) {
+                $this->armiesActive[$army->id] = true;
+                foreach ($army->units as $unit) {
+                    $this->unitsActive[$unit->id] = true;
+                }
+            }
+        }
+        $this->dispatch('countriesActiveUpdated', $this->countriesActive);
+        $this->dispatch('armiesActiveUpdated', $this->armiesActive);
+        $this->dispatch('unitsActiveUpdated', $this->unitsActive);
+    }
+
+    public function updatedCountriesActive($value)
+    {
+        $this->dispatch('countriesActiveUpdated', $this->countriesActive);
+        $this->skipRender();
+    }
+
+    public function updatedArmiesActive($value)
+    {
+        $this->dispatch('armiesActiveUpdated', $this->armiesActive);
+        $this->skipRender();
+    }
+
+    public function updatedUnitsActive($value)
+    {
+        $this->dispatch('unitsActiveUpdated', $this->unitsActive);
+        $this->skipRender();
     }
 
     public function placeholder(): string
     {
+//        \React\Promise\Timer\sleep(1);
         return <<<'HTML'
         <div class="block">
             <!-- Loading spinner... -->

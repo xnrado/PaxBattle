@@ -59,3 +59,7 @@
 .alert-error{
     background-color: #bf616a /*nord-11*/;
 }
+
+.sortable-item{
+    padding: 1px;
+}

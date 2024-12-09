@@ -9,4 +9,6 @@ import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.e
 Alpine.plugin(sort);
 Alpine.plugin(collapse);
 
+
+
 Livewire.start()
