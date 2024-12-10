@@ -20,13 +20,7 @@
                 <span class="w-full">
                     <input wire:model.live.debounce.50ms="name" id="name" name="name" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
                 </span>
-                <div>
-                    @error('name')
-                    <div class="animate-fade-up animate-duration-100 animate-once">
-                        <span>{{ $message }}</span>
-                    </div>
-                    @enderror
-                </div>
+                <x-input-validation field="name" />
             </div>
             {{-- Description --}}
             <div class="flex flex-col items-start mb-2">
@@ -38,13 +32,7 @@
                 <span class="w-full">
                     <input wire:model.live.debounce.50ms="description" id="description" name="description" class="w-full mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
                 </span>
-                <div>
-                    @error('description')
-                    <div class="animate-fade-up animate-duration-100 animate-once">
-                        <span>{{ $message }}</span>
-                    </div>
-                    @enderror
-                </div>
+                <x-input-validation field="description" />
             </div>
             {{-- Image --}}
             <div class="flex flex-col items-start mb-2">
@@ -88,13 +76,7 @@
                             <option value=50>Kanonia (50)</option>
                         </select>
                     </span>
-                    <div>
-                        @error('province_id')
-                        <div class="animate-spin animate-duration-300 animate-thrice">
-                            <span>{{ $message }}</span>
-                        </div>
-                        @enderror
-                    </div>
+                    <x-input-validation field="province_id" />
                 </div>
                 {{-- Width --}}
                 <div class="flex flex-col items-start mb-2">
@@ -108,13 +90,7 @@
                         <span class="w-full">
                             <input wire:model.live.debounce.50ms="x_size" id="x_size" name="x_size" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
                         </span>
-                        <div>
-                            @error('x_size')
-                            <div class="animate-fade-up animate-duration-100 animate-once">
-                                <span>{{ $message }}</span>
-                            </div>
-                            @enderror
-                        </div>
+                        <x-input-validation field="x_size" />
                     </div>
                 </div>
                 {{-- Height --}}
@@ -129,13 +105,7 @@
                         <span class="w-full">
                             <input wire:model.live.debounce.50ms="y_size" id="y_size" name="y_size" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
                         </span>
-                        <div>
-                            @error('y_size')
-                            <div class="animate-fade-up animate-duration-100 animate-once">
-                                <span>{{ $message }}</span>
-                            </div>
-                            @enderror
-                        </div>
+                        <x-input-validation field="y_size" />
                     </div>
                 </div>
             </div>
