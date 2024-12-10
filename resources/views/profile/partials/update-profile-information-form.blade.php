@@ -19,21 +19,21 @@
         @endif
         <div>
             <x-input-label for="username" :value="__('Username')" />
-            <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username', $user->username)" required autocomplete="username" disabled />
+            <x-text-input id="username" name="username" type="text" class="mt-1 block w-full bg-nord-6" :value="old('username', $user->username)" required autocomplete="username" disabled />
             <x-input-error class="mt-2" :messages="$errors->get('username')" />
         </div>
 
         @if (!Auth::user()->global_name)
             <div>
                 <x-input-label for="discriminator" :value="__('Discriminator')" />
-                <x-text-input id="discriminator" name="discriminator" type="text" class="mt-1 block w-full" :value="old('discriminator', $user->discriminator)" required autocomplete="discriminator" disabled />
+                <x-text-input id="discriminator" name="discriminator" type="text" class="mt-1 block w-full bg-nord-6" :value="old('discriminator', $user->discriminator)" required autocomplete="discriminator" disabled />
                 <x-input-error class="mt-2" :messages="$errors->get('discriminator')" />
             </div>
         @endif
 
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email ?? __('Unknown'))" required autocomplete="email" disabled />
+            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full bg-nord-6" :value="old('email', $user->email ?? __('Unknown'))" required autocomplete="email" disabled />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->verified)
