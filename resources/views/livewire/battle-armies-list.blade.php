@@ -1,9 +1,8 @@
 <div class="w-full">
-    @if($countries->isEmpty())
+    @if($this->countries->isEmpty())
         Dodaj lokalizację bitwy
 
     @else
-
             <div x-sort x-sort:group="sides" class="py-4">
                 {{-- Side --}}
                 <div x-sort:item="1" x-data="{ sideExpanded: true, sideActive: true }" class="flex flex-col">
@@ -33,7 +32,7 @@
                         <div class="gap-4" :class="sideActive ? 'bg-nord-0' : 'bg-nord-dark'">
                             <div x-sort x-sort:group="countries">
                                 {{-- Country --}}
-                                @foreach($countries as $country)
+                                @foreach($this->countries as $country)
                                 <div x-sort:item="{{$country->id}}" x-data="{ countryExpanded: true }" class="flex flex-col">
                                     {{-- CountryBar --}}
                                     <div class="flex flex-row w-full h-14 pl-4" :class="$wire.countriesActive[{{$country->id}}] ? '' : 'bg-nord-dark'">
@@ -42,14 +41,22 @@
                                         </div>
 
                                         <div class="px-1 py-3">
-                                            <input wire:model.change="countriesActive.{{$country->id}}" class="h-full w-auto aspect-square" type="checkbox" id="{{ $country->id }}" name="country">
+                                            <input id="{{ $country->id }}" wire:model.change="countriesActive.{{$country->id}}" class="h-full w-auto aspect-square" type="checkbox">
                                         </div>
 
                                         <div class="px-1 py-1">
                                             <img class="h-full w-auto drop-shadow-l" src="{{ asset('storage/'.$country->image) }}" alt="{{ $country->slug }}" >
                                         </div>
 
-                                        <h2>{{ $country->name }}</h2>
+                                        <div class="flex flex-col">
+                                            <h2>{{ $country->name }}</h2>
+{{--                                            wire:model.change="province_id"--}}
+                                            <select id="{{ $country->user->id }}" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm">
+                                                @foreach($this->users as $user)
+                                                    <option value={{$user->id}}>{{$user->username}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
 
                                         <div @click="countryExpanded = ! countryExpanded" class="px-2 py-2 transition-transform duration-400" :class="{ 'rotate-90': countryExpanded }">
                                             <img class="h-full w-auto drop-shadow-l" src="{{ asset('storage/img/arrow-right.svg') }}" alt="Toggle">

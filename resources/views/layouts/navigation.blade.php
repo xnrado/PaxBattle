@@ -80,7 +80,7 @@
                 <!--- Avatar --->
                 <div class="text-center">
                     <button class="inline-flex items-center m-1.5 text-gray-300 p-2 rounded-[0.5rem] border-2 border-nord-1 hover:bg-nord-2 hover:text-white focus:outline-none" type="button" data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
-                        <img class="h-8 w-8 rounded-full object-cover mr-2" src="{{ Auth::user()->getAvatar(['extension' => 'webp', 'size' => 32]) }}" alt="{{ Auth::user()->getTagAttribute() }}" />
+                        <img class="h-8 w-8 rounded-full object-cover mr-2" src="{{ Auth::user()->getAvatar(['extension' => 'webp', 'size' => 64]) }}" alt="{{ Auth::user()->getTagAttribute() }}" />
                         <div style="display: flex; flex-direction: column; align-items: flex-start;">
                             {{ Auth::user()->getTagAttribute() }}
                             @if (Auth::user()->global_name)

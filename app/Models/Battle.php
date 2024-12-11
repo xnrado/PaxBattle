@@ -6,6 +6,7 @@ use App\Traits\GenerateUniqueSlugTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Battle extends Model
 {
@@ -17,7 +18,10 @@ class Battle extends Model
     protected $fillable = [
         'name',
         'description',
-        'image'
+        'image',
+        'province_id',
+        'x_size',
+        'y_size'
     ];
 
     public function user(): BelongsToMany
@@ -31,5 +35,9 @@ class Battle extends Model
     public function side(): BelongsToMany
     {
         return $this->belongsToMany(Side::class, 'battle_country_user', );
+    }
+    public function battle_armies(): HasMany
+    {
+        return $this->hasMany(BattleArmy::class, 'battle_id');
     }
 }

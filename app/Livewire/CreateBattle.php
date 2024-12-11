@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class CreateBattle extends Component
 {
-    protected $listeners = ['armiesActiveUpdated', 'unitsActiveUpdated'];
+    protected $listeners = ['countriesActiveUpdated', 'armiesActiveUpdated', 'unitsActiveUpdated'];
 
     #[Validate('required', message: 'Nazwa bitwy jest wymagana.')]
     #[Validate('min:5')]
@@ -20,11 +20,11 @@ class CreateBattle extends Component
     public $description = '';
 
     #[Validate('required')]
-    public $province_id = null;
+    public $province_id = 1; // This has to be predefined, otherwise weird things happen with lazy loading
 
     #[Validate('required')]
     public $x_size = null;
-
+    // These should be predefined as well in the future
     #[Validate('required')]
     public $y_size = null;
 
@@ -38,45 +38,54 @@ class CreateBattle extends Component
     public function countriesActiveUpdated($countriesActive)
     {
         $this->countriesActive = $countriesActive;
-        $this->skipRender();
     }
     public function armiesActiveUpdated($armiesActive)
     {
         $this->armiesActive = $armiesActive;
-        $this->skipRender();
     }
     public function unitsActiveUpdated($unitsActive)
     {
         $this->unitsActive = $unitsActive;
-        $this->skipRender();
     }
 
 
     public function save()
     {
         $this->validate();
+        $this->dispatch('callSendOnSave');
+        dd($this->armiesActive);
 
         $province_id = $this->province_id;
-        $countries = Country::whereHas('armies', function ($query) use ($province_id) {
-        $query->where('province_id', $province_id);
-        })
-            ->with([
-                'armies' => function ($query) use ($province_id) {
-                    $query->where('province_id', $province_id)
-                        ->with([
-                            'units.unitTemplate',
-                        ]);
-                },
-            ])
-            ->get();
+//        $countries = Country::whereHas('armies', function ($query) use ($province_id) {
+//        $query->where('province_id', $province_id);
+//        })
+//            ->with(['user',
+//                'armies' => function ($query) use ($province_id) {
+//                    $query->where('province_id', $province_id)
+//                        ->with([
+//                            'units.unit_template',
+//                        ]);
+//                },
+//            ])
+//            ->get();
 
-        $battle = new Battle();
-        $battle->name = $this->name;
-        $battle->description = $this->description;
-        $battle->province_id = $this->province_id;
-        $battle->x_size = $this->x_size;
-        $battle->y_size = $this->y_size;
+        $battle = new Battle([
+            'name' => $this->name,
+            'description' => $this->description,
+            'province_id' => $this->province_id,
+            'x_size' => $this->x_size,
+            'y_size' => $this->y_size,
+        ]);
         $battle->save();
+
+//        $pivots = [];
+//        foreach ($countries as $country) {
+//            $pivots[$country->id] = ['user_id' => $country->user->id, 'is_active' => 1];
+//            $battle->country()->attach($country, ['user_id' => $country->user->id, 'is_active' => 1]);
+//        }
+//        $battle->country()->attach($pivots);
+//        $battle->save();
+
 
         session()->flash('status', 'Pomyślnie utworzono bitwę.');
 

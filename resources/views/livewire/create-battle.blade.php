@@ -18,7 +18,7 @@
                     </span>
                 </label>
                 <span class="w-full">
-                    <input wire:model.live.debounce.50ms="name" id="name" name="name" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
+                    <input wire:model.blur.debounce.50ms="name" id="name" name="name" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
                 </span>
                 <x-input-validation field="name" />
             </div>
@@ -30,7 +30,7 @@
                     </span>
                 </label>
                 <span class="w-full">
-                    <input wire:model.live.debounce.50ms="description" id="description" name="description" class="w-full mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
+                    <input wire:model.blur.debounce.50ms="description" id="description" name="description" class="w-full mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
                 </span>
                 <x-input-validation field="description" />
             </div>
@@ -88,7 +88,7 @@
                             </span>
                         </label>
                         <span class="w-full">
-                            <input wire:model.live.debounce.50ms="x_size" id="x_size" name="x_size" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
+                            <input wire:model.blur.debounce.50ms="x_size" id="x_size" name="x_size" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
                         </span>
                         <x-input-validation field="x_size" />
                     </div>
@@ -103,7 +103,7 @@
                             </span>
                         </label>
                         <span class="w-full">
-                            <input wire:model.live.debounce.50ms="y_size" id="y_size" name="y_size" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
+                            <input wire:model.blur.debounce.50ms="y_size" id="y_size" name="y_size" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
                         </span>
                         <x-input-validation field="y_size" />
                     </div>
@@ -118,9 +118,10 @@
             </div>
         </div>
     </div>
-    Name: {{ var_export($name) }}
-    Armies: {{ var_export($armiesActive) }}
-    Units: {{ var_export($unitsActive) }}
+    Name: {{ var_export($name) }}<br>
+    Countries: {{ var_export($countriesActive) }}<br>
+    Armies: {{ var_export($armiesActive) }}<br>
+    Units: {{ var_export($unitsActive) }}<br>
     <div class="mt-6 flex items-center justify-end gap-x-6">
         <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
         <button type="submit"

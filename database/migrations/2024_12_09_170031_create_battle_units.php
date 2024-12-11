@@ -18,21 +18,23 @@ return new class extends Migration
         // countries in 'country_unit_template' if they lose them for some reason.
 
         Schema::create('battle_armies', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('old_id')->unsigned();
+            $table->bigInteger('id')->unsigned();
             $table->foreignId('country_id')->comment('army controller');
             $table->foreignId('battle_id')->comment('battle in which army takes part');
             $table->string('name');
             $table->boolean('is_active');
             $table->timestamps();
+            $table->primary(['id', 'battle_id']);
+            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('battle_id')->references('id')->on('battles');
         });
 
         Schema::create('battle_units', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('old_id')->unsigned();
+            $table->bigInteger('id')->unsigned();
             $table->foreignId('unit_template_id');
             $table->foreignId('origin_id')->comment('unit province origin');
-            $table->foreignId('battleArmy_id');
+            $table->foreignId('battle_id')->comment('battle in which unit takes part');
+            $table->foreignId('battle_army_id');
             $table->string('name');
             $table->unsignedInteger('left_movement');
             $table->boolean('is_visible');
@@ -40,6 +42,11 @@ return new class extends Migration
             $table->boolean('is_conscripted');
             $table->boolean('is_active');
             $table->timestamps();
+            $table->primary(['id', 'battle_id']);
+            $table->foreign('unit_template_id')->references('id')->on('unit_templates');
+            $table->foreign('origin_id')->references('id')->on('provinces');
+            $table->foreign('battle_id')->references('id')->on('battles');
+            $table->foreign('battle_army_id')->references('id')->on('battle_armies');
         });
     }
 

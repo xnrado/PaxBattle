@@ -3,22 +3,28 @@
 namespace App\Livewire;
 
 use App\Models\Country;
+use App\Models\User;
 use Livewire\Component;
 use Illuminate\View\View;
+use Livewire\Attributes\Computed;
 
 class BattleArmiesList extends Component
 {
-    public $countries;
+    protected $listeners = ['callSendOnSave'];
+
+    public $test;
+    public $province_id;
     public $countriesActive = array();
     public $armiesActive = array();
     public $unitsActive = array();
-
-    public function mount($province_id): void
+    #[Computed]
+    public function countries()
     {
-        $this->countries = Country::whereHas('armies', function ($query) use ($province_id) {
+        $province_id = $this->province_id;
+        return Country::whereHas('armies', function ($query) use ($province_id) {
             $query->where('province_id', $province_id);
         })
-            ->with([
+            ->with(['user',
                 'armies' => function ($query) use ($province_id) {
                     $query->where('province_id', $province_id)
                         ->with([
@@ -27,6 +33,21 @@ class BattleArmiesList extends Component
                 },
             ])
             ->get();
+    }
+    #[Computed]
+    public function users()
+    {
+        return User::all();
+    }
+
+    public function callSendOnSave()
+    {
+        $this->sendOnSave();
+    }
+
+    public function mount($province_id): void
+    {
+        $this->province_id = $province_id;
 
         foreach ($this->countries as $country) {
             $this->countriesActive[$country->id] = true;
@@ -45,7 +66,6 @@ class BattleArmiesList extends Component
     public function updatedCountriesActive($value)
     {
         $this->dispatch('countriesActiveUpdated', $this->countriesActive);
-        $this->skipRender();
     }
 
     public function updatedArmiesActive($value)
@@ -56,6 +76,14 @@ class BattleArmiesList extends Component
 
     public function updatedUnitsActive($value)
     {
+        $this->dispatch('unitsActiveUpdated', $this->unitsActive);
+        $this->skipRender();
+    }
+
+    public function sendOnSave()
+    {
+        $this->dispatch('countriesActiveUpdated', $this->countriesActive);
+        $this->dispatch('armiesActiveUpdated', $this->armiesActive);
         $this->dispatch('unitsActiveUpdated', $this->unitsActive);
         $this->skipRender();
     }
