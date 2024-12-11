@@ -3,7 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\Country;
+use App\Models\Province;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 use Illuminate\View\View;
 use Livewire\Attributes\Computed;
@@ -35,7 +37,7 @@ class BattleArmiesList extends Component
             ->get();
     }
     #[Computed]
-    public function users()
+    public function users(): Collection
     {
         return User::all();
     }

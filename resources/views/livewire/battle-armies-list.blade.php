@@ -3,7 +3,7 @@
         Dodaj lokalizację bitwy
 
     @else
-            <div x-sort x-sort:group="sides" class="py-4">
+            <div x-sort x-sort:group="sides" class="py-4 animate-fade-up animate-duration-500 animate-delay-500 animate-once">
                 {{-- Side --}}
                 <div x-sort:item="1" x-data="{ sideExpanded: true, sideActive: true }" class="flex flex-col">
                     {{-- SideBar --}}

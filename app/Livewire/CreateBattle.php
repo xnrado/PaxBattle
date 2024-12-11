@@ -5,6 +5,9 @@ namespace App\Livewire;
 use App\Livewire\Forms\BattleForm;
 use App\Models\Battle;
 use App\Models\Country;
+use App\Models\Province;
+use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -31,6 +34,12 @@ class CreateBattle extends Component
     public $countriesActive = array();
     public $armiesActive = array();
     public $unitsActive = array();
+
+    #[Computed]
+    public function provinces(): Collection
+    {
+        return Province::all();
+    }
 
 
     public $battle;

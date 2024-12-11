@@ -72,8 +72,9 @@
                     </label>
                     <span class="w-full">
                         <select wire:model.change.lazy="province_id" id="province_id" name="province_id" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm">
-                            <option value=1>Albion (1)</option>
-                            <option value=50>Kanonia (50)</option>
+                            @foreach($this->provinces as $province)
+                                <option value={{$province->id}}>{{"(".$province->id.") ".$province->name}}</option>
+                            @endforeach
                         </select>
                     </span>
                     <x-input-validation field="province_id" />

@@ -24,15 +24,15 @@ class Battle extends Model
         'y_size'
     ];
 
-    public function user(): BelongsToMany
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'battle_country_user');
     }
-    public function country(): BelongsToMany
+    public function countries(): BelongsToMany
     {
         return $this->belongsToMany(Country::class, 'battle_country_user');
     }
-    public function side(): BelongsToMany
+    public function sides(): BelongsToMany
     {
         return $this->belongsToMany(Side::class, 'battle_country_user', );
     }

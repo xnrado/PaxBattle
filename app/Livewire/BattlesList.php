@@ -13,7 +13,7 @@ class BattlesList extends Component
 
     public function mount(): void
     {
-        $this->battles = Battle::with('user', 'country')->whereRelation('user', 'id', '=', Auth::id())->get();
+        $this->battles = Battle::with('users', 'countries')->whereRelation('users', 'id', '=', Auth::id())->get();
     }
 
     public function placeholder(): string
