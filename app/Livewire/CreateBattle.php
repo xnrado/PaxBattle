@@ -53,7 +53,6 @@ class CreateBattle extends Component
     {
         $this->validate();
         $this->dispatch('callSendOnSave');
-        dd($this->armiesActive);
 
         $province_id = $this->province_id;
 //        $countries = Country::whereHas('armies', function ($query) use ($province_id) {
