@@ -1,4 +1,4 @@
-<form wire:submit="save" class="py-10 mx-auto max-w-screen-md text-nord-6" enctype="multipart/form-data">
+<form wire:submit="submit" class="py-10 mx-auto max-w-screen-md text-nord-6" enctype="multipart/form-data">
     @csrf
     <div class="pb-2 mb-2 border-b border-solid border-nord-1">
         <h1 class="text-2xl font-bold">Utwórz nową bitwę</h1>
@@ -120,9 +120,7 @@
         </div>
     </div>
     Name: {{ var_export($name) }}<br>
-    Countries: {{ var_export($countriesActive) }}<br>
-    Armies: {{ var_export($armiesActive) }}<br>
-    Units: {{ var_export($unitsActive) }}<br>
+    Active: <br>{{ var_export($active) }}<br>
     <div class="mt-6 flex items-center justify-end gap-x-6">
         <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
         <button type="submit"

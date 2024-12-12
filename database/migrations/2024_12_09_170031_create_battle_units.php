@@ -19,6 +19,7 @@ return new class extends Migration
 
         Schema::create('battle_armies', function (Blueprint $table) {
             $table->bigInteger('id')->unsigned();
+            $table->bigInteger('order')->unsigned();
             $table->foreignId('country_id')->comment('army controller');
             $table->foreignId('battle_id')->comment('battle in which army takes part');
             $table->string('name');
@@ -31,6 +32,7 @@ return new class extends Migration
 
         Schema::create('battle_units', function (Blueprint $table) {
             $table->bigInteger('id')->unsigned();
+            $table->bigInteger('order')->unsigned();
             $table->foreignId('unit_template_id');
             $table->foreignId('origin_id')->comment('unit province origin');
             $table->foreignId('battle_id')->comment('battle in which unit takes part');

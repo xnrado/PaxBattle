@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\BattleCountryUser;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -15,7 +16,7 @@ class BattlesTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('sides')->insert(array (
+        \DB::table('factions')->insert(array (
             0 =>
                 array (
                     'id' => 1,
@@ -59,11 +60,31 @@ class BattlesTableSeeder extends Seeder
                 ),
         ));
 
-        $user = User::query()->find(381473729290698752);
-        $user->battles()->attach(1, ['country_id' => 1, 'side_id' => 1, 'is_active' => 1]);
-        $user->battles()->attach(2, ['country_id' => 1, 'side_id' => 2, 'is_active' => 1]);
-        $user = User::query()->find(751909872890675291);
-        $user->battles()->attach(2, ['country_id' => 2, 'side_id' => 2, 'is_active' => 1]);
+
+        $bcu = new BattleCountryUser([
+            'user_id' => 381473729290698752,
+            'country_id' => 1,
+            'battle_id' => 1,
+            'faction_id' => null,
+            'is_active' => true,
+        ]);
+        $bcu->save();
+        $bcu = new BattleCountryUser([
+            'user_id' => 381473729290698752,
+            'country_id' => 1,
+            'battle_id' => 2,
+            'faction_id' => null,
+            'is_active' => true,
+        ]);
+        $bcu->save();
+        $bcu = new BattleCountryUser([
+            'user_id' => 751909872890675291,
+            'country_id' => 2,
+            'battle_id' => 2,
+            'faction_id' => null,
+            'is_active' => true,
+        ]);
+        $bcu->save();
 
 
     }

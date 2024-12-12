@@ -32,9 +32,9 @@ class Battle extends Model
     {
         return $this->belongsToMany(Country::class, 'battle_country_user');
     }
-    public function sides(): BelongsToMany
+    public function factions(): BelongsToMany
     {
-        return $this->belongsToMany(Side::class, 'battle_country_user', );
+        return $this->belongsToMany(Faction::class, 'battle_country_user', );
     }
     public function battle_armies(): HasMany
     {

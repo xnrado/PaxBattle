@@ -2,23 +2,31 @@
 
 namespace App\Livewire;
 
+use App\Models\BattleCountryUser;
 use App\Models\Country;
 use App\Models\Province;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 
 class BattleArmiesList extends Component
 {
-    protected $listeners = ['callSendOnSave'];
-
-    public $test;
+    //// Variables
     public $province_id;
-    public $countriesActive = array();
-    public $armiesActive = array();
-    public $unitsActive = array();
+
+    #[Validate([
+        'active.factions.*.countries.*.user_id' => [
+            'min:1'
+        ],
+
+    ], message: [
+        'active.factions.*.countries.*.user_id.min' => 'Żadne państwo nie może być bez gracza. :attribute',
+    ]
+    )]
+    public $active = array('factions' => [0 => []]);
     #[Computed]
     public function countries()
     {
@@ -42,53 +50,81 @@ class BattleArmiesList extends Component
         return User::all();
     }
 
-    public function callSendOnSave()
+    //// Listeners
+    protected $listeners = ['preValidate', 'armyValidate'];
+    public function preValidate()
     {
-        $this->sendOnSave();
+        $this->validate();
+    }
+    public function armyValidate()
+    {
+        $this->dispatch('activeUpdated', $this->active);
+        $this->validate();
+        $this->dispatch('battleSave');
     }
 
+    //// Functions
     public function mount($province_id): void
     {
         $this->province_id = $province_id;
 
+        // active[0] is for non-aligned, other keys are faction id's
         foreach ($this->countries as $country) {
-            $this->countriesActive[$country->id] = true;
+            $this->active['factions'][0]['countries'][$country->id] = [
+                'active' => true,
+                'user_id' => $country->user ? "{$country->user->id}" : null,
+                'armies' => [],
+            ];
             foreach ($country->armies as $army) {
-                $this->armiesActive[$army->id] = true;
+                $this->active['factions'][0]['countries'][$country->id]['armies'][$army->id] = [
+                    'active' => true,
+                    'units' => [],
+                ];
                 foreach ($army->units as $unit) {
-                    $this->unitsActive[$unit->id] = true;
+                    $this->active['factions'][0]['countries'][$country->id]['armies'][$army->id]['units'][$unit->id] = [
+                        'active' => true,
+                    ];
                 }
             }
         }
-        $this->dispatch('countriesActiveUpdated', $this->countriesActive);
-        $this->dispatch('armiesActiveUpdated', $this->armiesActive);
-        $this->dispatch('unitsActiveUpdated', $this->unitsActive);
+
+        //array:1 [▼
+        //  "factions" => array:1 [▼
+        //    0 => array:1 [▼
+        //      "countries" => array:2 [▼
+        //        1 => array:3 [▶]
+        //        2 => array:3 [▼
+        //          "active" => true
+        //          "user_id" => "751909872890675291"
+        //          "armies" => array:3 [▼
+        //            3 => array:2 [▶]
+        //            4 => array:2 [▶]
+        //            5 => array:2 [▼
+        //              "active" => true
+        //              "units" => array:3 [▼
+        //                10 => array:1 [▶]
+        //                11 => array:1 [▶]
+        //                12 => array:1 [▼
+        //                  "active" => true
+        //                ]
+        //              ]
+        //            ]
+        //          ]
+        //        ]
+        //      ]
+        //    ]
+        //  ]
+        //]
+
+        $this->dispatch('activeUpdated', $this->active);
     }
 
-    public function updatedCountriesActive($value)
-    {
-        $this->dispatch('countriesActiveUpdated', $this->countriesActive);
-    }
+//    public function updatedActive($value)
+//    {
+//        $this->dispatch('activeUpdated', $this->active);
+//    }
 
-    public function updatedArmiesActive($value)
-    {
-        $this->dispatch('armiesActiveUpdated', $this->armiesActive);
-        $this->skipRender();
-    }
 
-    public function updatedUnitsActive($value)
-    {
-        $this->dispatch('unitsActiveUpdated', $this->unitsActive);
-        $this->skipRender();
-    }
-
-    public function sendOnSave()
-    {
-        $this->dispatch('countriesActiveUpdated', $this->countriesActive);
-        $this->dispatch('armiesActiveUpdated', $this->armiesActive);
-        $this->dispatch('unitsActiveUpdated', $this->unitsActive);
-        $this->skipRender();
-    }
 
     public function placeholder(): string
     {
