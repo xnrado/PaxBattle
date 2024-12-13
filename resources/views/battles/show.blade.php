@@ -22,8 +22,8 @@
 
             </div>
 
-            {{ $battle }}
-
+{{--            {{ $battle }}--}}
+            <livewire:view-battle-armies-list :battle_id="$battle->id" lazy/>
         </div>
     </div>
 </x-app-layout>

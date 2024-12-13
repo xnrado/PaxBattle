@@ -16,6 +16,7 @@ class UnitsTableSeeder extends Seeder
             0 =>
                 array (
                     'id' => 1,
+                    'order' => 1,
                     'unit_template_id' => 1,
                     'origin_id' => 50,
                     'army_id' => 1,
@@ -30,6 +31,7 @@ class UnitsTableSeeder extends Seeder
             1 =>
                 array (
                     'id' => 2,
+                    'order' => 2,
                     'unit_template_id' => 1,
                     'origin_id' => 50,
                     'army_id' => 1,
@@ -44,6 +46,7 @@ class UnitsTableSeeder extends Seeder
             2 =>
                 array (
                     'id' => 3,
+                    'order' => 3,
                     'unit_template_id' => 1,
                     'origin_id' => 50,
                     'army_id' => 2,
@@ -58,6 +61,7 @@ class UnitsTableSeeder extends Seeder
             3 =>
                 array (
                     'id' => 4,
+                    'order' => 4,
                     'unit_template_id' => 1,
                     'origin_id' => 50,
                     'army_id' => 2,
@@ -72,6 +76,7 @@ class UnitsTableSeeder extends Seeder
             4 =>
                 array (
                     'id' => 5,
+                    'order' => 5,
                     'unit_template_id' => 1,
                     'origin_id' => 50,
                     'army_id' => 2,
@@ -86,6 +91,7 @@ class UnitsTableSeeder extends Seeder
             5 =>
                 array (
                     'id' => 6,
+                    'order' => 6,
                     'unit_template_id' => 1,
                     'origin_id' => 50,
                     'army_id' => 3,
@@ -100,6 +106,7 @@ class UnitsTableSeeder extends Seeder
             6 =>
                 array (
                     'id' => 7,
+                    'order' => 7,
                     'unit_template_id' => 1,
                     'origin_id' => 50,
                     'army_id' => 3,
@@ -114,6 +121,7 @@ class UnitsTableSeeder extends Seeder
             7 =>
                 array (
                     'id' => 8,
+                    'order' => 8,
                     'unit_template_id' => 2,
                     'origin_id' => 50,
                     'army_id' => 4,
@@ -128,6 +136,7 @@ class UnitsTableSeeder extends Seeder
             8 =>
                 array (
                     'id' => 9,
+                    'order' => 9,
                     'unit_template_id' => 2,
                     'origin_id' => 50,
                     'army_id' => 4,
@@ -142,6 +151,7 @@ class UnitsTableSeeder extends Seeder
             9 =>
                 array (
                     'id' => 10,
+                    'order' => 10,
                     'unit_template_id' => 2,
                     'origin_id' => 50,
                     'army_id' => 5,
@@ -156,6 +166,7 @@ class UnitsTableSeeder extends Seeder
             10 =>
                 array (
                     'id' => 11,
+                    'order' => 11,
                     'unit_template_id' => 2,
                     'origin_id' => 50,
                     'army_id' => 5,
@@ -170,6 +181,7 @@ class UnitsTableSeeder extends Seeder
             11 =>
                 array (
                     'id' => 12,
+                    'order' => 12,
                     'unit_template_id' => 1,
                     'origin_id' => 50,
                     'army_id' => 5,

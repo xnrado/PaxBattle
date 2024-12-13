@@ -2,9 +2,10 @@
 
 namespace App\Livewire;
 
-use App\Livewire\Forms\BattleForm;
 use App\Models\Battle;
+use App\Models\BattleArmy;
 use App\Models\BattleCountryUser;
+use App\Models\BattleUnit;
 use App\Models\Country;
 use App\Models\Province;
 use Illuminate\Database\Eloquent\Collection;
@@ -25,6 +26,7 @@ class CreateBattle extends Component
     public $province_id = 1; // This has to be predefined, otherwise weird things happen with lazy loading
 
     #[Validate('required')]
+    #[Validate('min:5')]
     public $x_size = null;
     // These should be predefined as well in the future
     #[Validate('required')]
@@ -86,22 +88,40 @@ class CreateBattle extends Component
             ->get();
 
         foreach ($this->active['factions'] as $faction_id => $faction) {
-            if ($faction_id == 0) { // If equal to 0, then non-aligned
-                $faction_id = null;
-            }
-            foreach ($faction['countries'] as $country_id => $country) {
-                // Country
+            foreach ($faction['countries'] as $battle_country_id => $battle_country) { // $country_id = ['active', 'user_id', 'armies']
+                // Add Factions and Countries
                 BattleCountryUser::create([
-                    'user_id' => $country['user_id'],
-                    'country_id' => $country_id,
+                    'user_id' => $battle_country['user_id'],
+                    'country_id' => $battle_country_id,
                     'battle_id' => $battle->id,
-                    'faction_id' => $faction_id,
-                    'is_active' => $country['active'],
+                    'faction_id' => $faction_id == '' ? null : $faction_id,
+                    'is_active' => $battle_country['active'],
                 ]);
-                foreach ($country['armies'] as $army_id => $army) {
-
-                    foreach ($army['units'] as $unit_id => $unit) {
-
+                foreach ($battle_country['armies'] as $battle_army_id => $battle_army) { // $army_id = ['active', 'units']
+                    // Add Armies
+                    $army = $countries->find($battle_country_id)->armies->find($battle_army_id); // $army = ['id', 'country_id', 'province_id', 'name']
+                    BattleArmy::create([
+                        'id' => $battle_army_id,
+                        'country_id' => $battle_country_id,
+                        'battle_id' => $battle->id,
+                        'name' => $army->name,
+                        'is_active' => $battle_army['active'],
+                    ]);
+                    foreach ($battle_army['units'] as $battle_unit_id => $battle_unit) { // $unit_id = ['active']
+                        $unit = $army->units->find($battle_unit_id); // $unit = ['id', 'unit_template_id', 'origin_id', 'army_id', 'name', 'left_movement', 'is_visible', 'manpower', 'is_conscripted']
+                        BattleUnit::create([
+                            'id' => $battle_unit_id,
+                            'unit_template_id' => $unit->unit_template_id,
+                            'origin_id' => $unit->origin_id,
+                            'battle_id' => $battle->id,
+                            'battle_army_id' => $battle_army_id,
+                            'name' => $unit->name,
+                            'left_movement' => $unit->left_movement,
+                            'is_visible' => $unit->is_visible,
+                            'manpower' => $unit->manpower,
+                            'is_conscripted' => $unit->is_conscripted,
+                            'is_active' => $battle_unit['active'],
+                        ]);
                     }
                 }
             }

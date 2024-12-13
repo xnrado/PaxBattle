@@ -16,6 +16,7 @@ class ArmiesTableSeeder extends Seeder
             0 =>
                 array (
                     'id' => 1,
+                    'order' => 1,
                     'name' => 'Armia K Zielona',
                     'country_id' => 1,
                     'province_id' => 50,
@@ -25,6 +26,7 @@ class ArmiesTableSeeder extends Seeder
             1 =>
                 array (
                     'id' => 2,
+                    'order' => 2,
                     'name' => 'Armia K Czerwone',
                     'country_id' => 1,
                     'province_id' => 50,
@@ -34,6 +36,7 @@ class ArmiesTableSeeder extends Seeder
             2 =>
                 array (
                     'id' => 3,
+                    'order' => 3,
                     'name' => 'Armia N Biała',
                     'country_id' => 2,
                     'province_id' => 50,
@@ -43,6 +46,7 @@ class ArmiesTableSeeder extends Seeder
             3 =>
                 array (
                     'id' => 4,
+                    'order' => 4,
                     'name' => 'Armia N Czarna',
                     'country_id' => 2,
                     'province_id' => 50,
@@ -52,6 +56,7 @@ class ArmiesTableSeeder extends Seeder
             4 =>
                 array (
                     'id' => 5,
+                    'order' => 5,
                     'name' => 'Armia N Zółta',
                     'country_id' => 2,
                     'province_id' => 50,

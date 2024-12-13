@@ -12,12 +12,12 @@ use Livewire\Component;
 use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 
-class BattleArmiesList extends Component
+class ViewBattleArmiesList extends Component
 {
-    public $editable = true;
-
     //// Variables
-    public $province_id;
+    public $editable = false;
+
+    public $battle_id;
 
     #[Validate([
         'active.factions.*.countries.*.user_id' => [
@@ -25,26 +25,77 @@ class BattleArmiesList extends Component
         ],
 
     ], message: [
-        'active.factions.*.countries.*.user_id.min' => 'Żadne państwo nie może być bez gracza. :attribute',
+        'active.factions.*.countries.*.user_id.min' => 'Żadne państwo nie może być bez gracza.',
     ]
     )]
     public $active = array('factions' => [null => []]);
     #[Computed]
-    public function countries()
+    public function countries_factions()
     {
-        $province_id = $this->province_id;
-        return Country::whereHas('armies', function ($query) use ($province_id) {
-            $query->where('province_id', $province_id);
+        $battle_id = $this->battle_id;
+
+        // Get Info
+        $countries = Country::whereHas('battles', function ($query) use ($battle_id) {
+            $query->where('id', $battle_id);
         })
             ->with(['user',
-                'armies' => function ($query) use ($province_id) {
-                    $query->where('province_id', $province_id)
+                'faction' => function ($query) use ($battle_id) {
+                    $query->where('battle_id', $battle_id);
+                },
+                'battle_armies' => function ($query) use ($battle_id) {
+                    $query->where('battle_id', $battle_id)
                         ->with([
-                            'units.unit_template',
+                            'battle_units' => function ($query) use ($battle_id) {
+                            $query->where('battle_id', $battle_id)
+                                ->with([
+                                    'unit_template'
+                                ]);
+                            }
                         ]);
                 },
             ])
             ->get();
+
+        // Rename relations
+        $countries->each(function ($country) {
+            $country->setRelation('armies', $country->getRelation('battle_armies'));
+
+            $country->armies->each(function ($army) {
+                $army->setRelation('units', $army->getRelation('battle_units'))->makeHidden('battle_units');
+            });
+
+            $country->unsetRelation('battle_armies');
+        });
+
+        $rcountries = new Collection;
+        $factions = new Collection;
+        foreach ($countries as $country) {
+            if ($country->faction && !$factions->contains($country->faction)) {
+                $factions->push($country->faction->setRelation('countries' , new Collection));
+//                dd($factions);
+            }
+            if ($country->faction) {
+                $factionId = $country->faction->id;
+                $key = $factions->search(function ($faction) use ($factionId) {
+                    return $faction->id === $factionId;
+                });
+                $factions[$key]->countries->push($country);
+            } else {
+                $rcountries->push($country);
+            }
+        }
+//        dd($rcountries, $factions);
+        return [$rcountries, $factions];
+    }
+    #[Computed]
+    public function countries(): Collection
+    {
+        return $this->countries_factions[0];
+    }
+    #[Computed]
+    public function factions(): Collection
+    {
+        return $this->countries_factions[1];
     }
     #[Computed]
     public function users(): Collection
@@ -66,24 +117,23 @@ class BattleArmiesList extends Component
     }
 
     //// Functions
-    public function mount($province_id): void
+    public function mount($battle_id): void
     {
-        $this->province_id = $province_id;
-
-        // active[factions][null] is for non-aligned, other keys are faction id's
+        $this->battle_id = $battle_id;
+        // active[0] is for non-aligned, other keys are faction id's
         foreach ($this->countries as $country) {
-            $this->active['factions'][null]['countries'][$country->id] = [
+            $this->active['factions'][0]['countries'][$country->id] = [
                 'active' => true,
                 'user_id' => $country->user ? "{$country->user->id}" : null,
                 'armies' => [],
             ];
             foreach ($country->armies as $army) {
-                $this->active['factions'][null]['countries'][$country->id]['armies'][$army->id] = [
+                $this->active['factions'][0]['countries'][$country->id]['armies'][$army->id] = [
                     'active' => true,
                     'units' => [],
                 ];
                 foreach ($army->units as $unit) {
-                    $this->active['factions'][null]['countries'][$country->id]['armies'][$army->id]['units'][$unit->id] = [
+                    $this->active['factions'][0]['countries'][$country->id]['armies'][$army->id]['units'][$unit->id] = [
                         'active' => true,
                     ];
                 }
@@ -92,7 +142,7 @@ class BattleArmiesList extends Component
 
         //array:1 [▼
         //  "factions" => array:1 [▼
-        //    null => array:1 [▼
+        //    0 => array:1 [▼
         //      "countries" => array:2 [▼
         //        1 => array:3 [▶]
         //        2 => array:3 [▼

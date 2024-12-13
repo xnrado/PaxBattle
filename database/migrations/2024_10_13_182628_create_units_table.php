@@ -42,6 +42,7 @@ return new class extends Migration
 
         Schema::create('armies', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('order')->unsigned();
             $table->foreignId('country_id')->comment('army controller');
             $table->foreignId('province_id')->comment('army province position');
             $table->string('name');
@@ -50,6 +51,7 @@ return new class extends Migration
 
         Schema::create('units', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('order')->unsigned();
             $table->foreignId('unit_template_id');
             $table->foreignId('origin_id')->comment('unit province origin');
             $table->foreignId('army_id');
