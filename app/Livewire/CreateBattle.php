@@ -17,7 +17,7 @@ class CreateBattle extends Component
 {
     //// Variables
     #[Validate('required', message: 'Nazwa bitwy jest wymagana.')]
-    #[Validate('min:5')]
+    #[Validate('min:5', message: 'Nazwa bitwy musi mieć przynajmniej 5 znaków.')]
     public $name = '';
 
     public $description = '';
@@ -26,10 +26,13 @@ class CreateBattle extends Component
     public $province_id = 1; // This has to be predefined, otherwise weird things happen with lazy loading
 
     #[Validate('required')]
-    #[Validate('min:5')]
+    #[Validate('numeric')]
+    #[Validate('min:10')]
     public $x_size = null;
     // These should be predefined as well in the future
     #[Validate('required')]
+    #[Validate('numeric')]
+    #[Validate('min:10')]
     public $y_size = null;
 
     public $active = array();
