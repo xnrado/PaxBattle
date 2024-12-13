@@ -71,9 +71,9 @@
                         </span>
                     </label>
                     <span class="w-full">
-                        <select wire:model.change.lazy="province_id" id="province_id" name="province_id" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm">
+                        <select wire:model.change.lazy="province_id" id="province_id" name="province_id" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 text-nord-4 items-stretch text-sm">
                             @foreach($this->provinces as $province)
-                                <option value={{$province->id}}>{{"(".$province->id.") ".$province->name}}</option>
+                                <option value={{$province->id}}>{{"(".$province->id.") ".$province->name}}></option>
                             @endforeach
                         </select>
                     </span>
