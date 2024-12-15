@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Battle extends Model
 {
-
     use HasFactory;
 
     use GenerateUniqueSlugTrait;

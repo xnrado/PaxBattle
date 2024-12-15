@@ -12,15 +12,24 @@ use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CreateBattle extends Component
 {
+    use WithFileUploads;
+
     //// Variables
     #[Validate('required', message: 'Nazwa bitwy jest wymagana.')]
     #[Validate('min:5', message: 'Nazwa bitwy musi mieć przynajmniej 5 znaków.')]
     public $name = '';
 
+    #[Validate('nullable')]
     public $description = '';
+
+    #[Validate('nullable')]
+    #[Validate('mimes:jpg,jpeg,png,bmp,gif,svg,avif,webp')]
+    #[Validate('max:10240')]
+    public $image;
 
     #[Validate('required')]
     public $province_id = 1; // This has to be predefined, otherwise weird things happen with lazy loading
@@ -28,12 +37,12 @@ class CreateBattle extends Component
     #[Validate('required')]
     #[Validate('numeric')]
     #[Validate('min:10')]
-    public $x_size = null;
-    // These should be predefined as well in the future
+    public $x_size = 10;
+
     #[Validate('required')]
     #[Validate('numeric')]
     #[Validate('min:10')]
-    public $y_size = null;
+    public $y_size = 10;
 
     public $active = array();
     #[Computed]
@@ -64,11 +73,18 @@ class CreateBattle extends Component
 
     public function save()
     {
+        $image_path = null;
+        // Upload image
+//        dd($this->image);
+        if ($this->image) {
+            $image_path = $this->image->store('img.battles', 'public');
+        }
 
         // Insert Battle
         $battle = new Battle([
             'name' => $this->name,
             'description' => $this->description,
+            'image' => $image_path,
             'province_id' => $this->province_id,
             'x_size' => $this->x_size,
             'y_size' => $this->y_size,

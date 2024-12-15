@@ -127,18 +127,18 @@ class ViewBattleArmiesList extends Component
         // active[factions][null] is for non-aligned, other keys are faction id's
         foreach ($this->countries as $country) {
             $this->active['factions'][null]['countries'][$country->id] = [
-                'active' => $country->battle_country_user->is_active,
+                'active' => $country->battle_country_user->is_active == 1,
                 'user_id' => $country->user ? "{$country->user->id}" : null,
                 'armies' => [],
             ];
             foreach ($country->armies as $army) {
                 $this->active['factions'][null]['countries'][$country->id]['armies'][$army->id] = [
-                    'active' => $army->is_active,
+                    'active' => $army->is_active == 1,
                     'units' => [],
                 ];
                 foreach ($army->units as $unit) {
                     $this->active['factions'][null]['countries'][$country->id]['armies'][$army->id]['units'][$unit->id] = [
-                        'active' => $unit->is_active,
+                        'active' => $unit->is_active == 1,
                     ];
                 }
             }
@@ -170,7 +170,8 @@ class ViewBattleArmiesList extends Component
         //    ]
         //  ]
         //]
-
+//        dd($this->active);
+        //active.factions..countries.1.armies.2.units.4.active
         $this->dispatch('activeUpdated', $this->active);
     }
 

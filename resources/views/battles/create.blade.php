@@ -3,8 +3,6 @@
         Tworzenie bitew
     </x-slot>
 
-    <div class="">
-        <livewire:create-battle/>
-    </div>
+    <livewire:create-battle/>
 
 </x-app-layout>

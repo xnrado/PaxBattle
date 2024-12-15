@@ -5,7 +5,7 @@
     </nav>
     <header>
         <div class="">
-            <div class="flex justify-between h-16">
+            <div class="flex justify-between h-8">
                 <div class="flex">
                     <!-- Navigation Links -->
 {{--                    {{dd($type->slug)}}--}}

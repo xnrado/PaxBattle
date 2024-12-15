@@ -1,4 +1,4 @@
-<form wire:submit="submit" class="py-10 mx-auto max-w-screen-md text-nord-6" enctype="multipart/form-data">
+<form wire:submit="submit" class="py-10 mx-auto max-w-screen-md text-nord-6">
     @csrf
     <div class="pb-2 mb-2 border-b border-solid border-nord-1">
         <h1 class="text-2xl font-bold">Utwórz nową bitwę</h1>
@@ -8,37 +8,32 @@
         <span class="italic">Wymagane pola są oznaczone gwiazdką (*).</span>
         <div class="mt-6"></div>
         {{-- Basic --}}
-        <div class="border-b border-solid border-nord-1">
+        <div class="border-b border-solid border-nord-1 space-y-2 pb-2">
             {{-- Name --}}
-            <div class="flex flex-col items-start mb-2">
-                <label class="block items-start" for="name">
-                    <span class="flex">
-                        <div class="mr-1"><strong>Nazwa bitwy</strong></div>
-                        <span>*</span>
-                    </span>
-                </label>
-                <span class="w-full">
-                    <input wire:model.blur.debounce.50ms="name" id="name" name="name" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
-                </span>
+            <div>
+                <x-input-label for="name" :value="__('Nazwa bitwy')" :required="true" />
+                <x-text-input wire:model.blur.debounce.50ms="name" id="name" name="name" type="text" />
                 <x-input-validation field="name" />
             </div>
             {{-- Description --}}
-            <div class="flex flex-col items-start mb-2">
-                <label class="block items-start" for="description">
-                    <span class="flex">
-                        <div class="mr-1"><strong>Opis bitwy</strong></div>
-                    </span>
-                </label>
-                <span class="w-full">
-                    <input wire:model.blur.debounce.50ms="description" id="description" name="description" class="w-full mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 items-stretch text-sm" type="text">
-                </span>
+            <div>
+                <x-input-label for="description" :value="__('Opis bitwy')" />
+                <x-text-input wire:model.blur.debounce.50ms="description" id="description" name="description" type="text" class="w-full"/>
                 <x-input-validation field="description" />
             </div>
             {{-- Image --}}
-            <div class="flex flex-col items-start mb-2">
-                <div
-                    class="w-full mt-1 flex justify-center rounded-lg border border-dashed border-nord-4/25 px-6 py-10">
-                    <div class="flex-col">
+            <div class="relative w-full h-48 mt-1 flex justify-center rounded-lg border border-dashed border-nord-4/25">
+                <div wire:loading wire:target="image" class="absolute z-50 w-full h-full bg-nord-0">
+                    <svg class="mx-auto my-auto" width="160" height="160" stroke="#d8dee9" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><style>.spinner_V8m1{transform-origin:center;animation:spinner_zKoa 2s linear infinite}.spinner_V8m1 circle{stroke-linecap:round;animation:spinner_YpZS 1.5s ease-in-out infinite}@keyframes spinner_zKoa{100%{transform:rotate(360deg)}}@keyframes spinner_YpZS{0%{stroke-dasharray:0 150;stroke-dashoffset:0}47.5%{stroke-dasharray:42 150;stroke-dashoffset:-16}95%,100%{stroke-dasharray:42 150;stroke-dashoffset:-59}}</style><g class="spinner_V8m1"><circle cx="12" cy="12" r="9.5" fill="none" stroke-width="3"></circle></g></svg>
+                </div>
+                @if ($image)
+                    <img class="w-full h-full object-cover" src="{{ $image->temporaryUrl() }}">
+                    <label for="image"
+                           class="absolute right-2 bottom-2 cursor-pointer rounded-md bg-white font-semibold text-nord-10 border-nord-0 border-solid border focus-within:outline-none focus-within:ring-2 focus-within:ring-nord-10 focus-within:ring-offset-2 hover:text-nord-10 px-2">
+                        <span>Zmień</span>
+                    </label>
+                @else
+                    <div class="flex flex-col justify-center items-center">
                         <svg class="mx-auto h-12 w-12 fill-nord-4" viewBox="0 0 24 24" aria-hidden="true"
                              data-slot="icon">
                             <path fill-rule="evenodd"
@@ -49,16 +44,16 @@
                             <label for="image"
                                    class="relative cursor-pointer rounded-md bg-white font-semibold text-nord-10 focus-within:outline-none focus-within:ring-2 focus-within:ring-nord-10 focus-within:ring-offset-2 hover:text-nord-10 px-2">
                                 <span>Załącz</span>
-                                <input id="image" name="image" type="file" class="sr-only"
-                                       accept="image/jpeg, image/png, image/gif, image/webp">
                             </label>
                             <p class="pl-1">albo wrzuć</p>
                         </div>
-                        <p class="text-xs leading-5 text-nord-5">PNG, JPG, GIF, WEBP do 10MB</p>
+                        <div class="text-xs leading-5 text-nord-5 w-fit">Obrazek do 10MB</div>
                     </div>
-                </div>
+                @endif
             </div>
-        </div>
+            <input wire:model="image" id="image" type="file" class="hidden">
+            <x-input-validation field="image" />
+
         {{-- Map --}}
         <div class="border-b border-solid border-nord-1">
             <div class="mt-6">
@@ -73,7 +68,7 @@
                     <span class="w-full">
                         <select wire:model.change.lazy="province_id" id="province_id" name="province_id" class="mt-1 bg-transparent px-2 py-1 rounded-md border-nord-1 text-nord-4 items-stretch text-sm">
                             @foreach($this->provinces as $province)
-                                <option value={{$province->id}}>{{"(".$province->id.") ".$province->name}}></option>
+                                <option value={{$province->id}}>{{"(".$province->id.") ".$province->name}}</option>
                             @endforeach
                         </select>
                     </span>
@@ -127,5 +122,6 @@
                 class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
             Save
         </button>
+    </div>
     </div>
 </form>
