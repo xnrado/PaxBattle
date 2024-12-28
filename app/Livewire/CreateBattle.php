@@ -19,6 +19,7 @@ class CreateBattle extends Component
     use WithFileUploads;
 
     //// Variables
+    // Simple
     #[Validate('required', message: 'Nazwa bitwy jest wymagana.')]
     #[Validate('min:5', message: 'Nazwa bitwy musi mieć przynajmniej 5 znaków.')]
     public $name = '';
@@ -26,8 +27,6 @@ class CreateBattle extends Component
     #[Validate('nullable')]
     public $description = '';
 
-    #[Validate('nullable')]
-    #[Validate('mimes:jpg,jpeg,png,bmp,gif,svg,avif,webp')]
     #[Validate('max:10240')]
     public $image;
 
@@ -44,7 +43,10 @@ class CreateBattle extends Component
     #[Validate('min:10')]
     public $y_size = 10;
 
+    // Listenable
     public $active = array();
+
+    // Computed
     #[Computed]
     public function provinces(): Collection
     {
@@ -53,10 +55,14 @@ class CreateBattle extends Component
     }
 
     //// Listeners
-    protected $listeners = ['activeUpdated', 'battleSave'];
+    protected $listeners = ['activeUpdated', 'imageUpdated', 'battleSave'];
     public function activeUpdated($active)
     {
         $this->active = $active;
+    }
+    public function imageUpdated($image)
+    {
+        $this->image = $image;
     }
     public function battleSave()
     {
@@ -74,10 +80,8 @@ class CreateBattle extends Component
     public function save()
     {
         $image_path = null;
-        // Upload image
-//        dd($this->image);
         if ($this->image) {
-            $image_path = $this->image->store('img.battles', 'public');
+            $image_path = $this->image->store('img/battles', 'public');
         }
 
         // Insert Battle

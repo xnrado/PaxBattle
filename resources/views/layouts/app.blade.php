@@ -13,6 +13,7 @@
 
         <!-- Scripts -->
         @livewireStyles
+        @wireUiScripts
         @vite(['resources/css/app.css', 'resources/js/app.ts'])
     </head>
     <body class="font-sans text-sm antialiased">

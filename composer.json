@@ -13,7 +13,8 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "spatie/eloquent-sortable": "^4.4",
-        "spatie/laravel-permission": "^6.10"
+        "spatie/laravel-permission": "^6.10",
+        "wireui/wireui": "^2.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",

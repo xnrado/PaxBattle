@@ -33,5 +33,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UnitTemplatesTableSeeder::class);
         $this->call(ArmiesTableSeeder::class);
         $this->call(UnitsTableSeeder::class);
+        $this->call(BattlefieldsTableSeeder::class);
     }
 }

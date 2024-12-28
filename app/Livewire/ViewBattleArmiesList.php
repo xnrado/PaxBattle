@@ -143,6 +143,26 @@ class ViewBattleArmiesList extends Component
                 }
             }
         }
+        foreach ($this->factions as $faction) {
+            foreach ($faction->countries as $country) {
+                $this->active['factions'][$faction->id]['countries'][$country->id] = [
+                    'active' => $country->battle_country_user->is_active == 1,
+                    'user_id' => $country->user ? "{$country->user->id}" : null,
+                    'armies' => [],
+                ];
+                foreach ($country->armies as $army) {
+                    $this->active['factions'][$faction->id]['countries'][$country->id]['armies'][$army->id] = [
+                        'active' => $army->is_active == 1,
+                        'units' => [],
+                    ];
+                    foreach ($army->units as $unit) {
+                        $this->active['factions'][$faction->id]['countries'][$country->id]['armies'][$army->id]['units'][$unit->id] = [
+                            'active' => $unit->is_active == 1,
+                        ];
+                    }
+                }
+            }
+        }
         //array:1 [▼
         //  "factions" => array:1 [▼
         //    0 => array:1 [▼
@@ -170,7 +190,6 @@ class ViewBattleArmiesList extends Component
         //    ]
         //  ]
         //]
-//        dd($this->active);
         //active.factions..countries.1.armies.2.units.4.active
         $this->dispatch('activeUpdated', $this->active);
     }

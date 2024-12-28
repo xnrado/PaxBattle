@@ -49,15 +49,18 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/images/{img}', [ImageViewController::class, 'img'])->name('images');
 
+    Route::get('/battles/{slug}', [BattleController::class, 'show'])->name('battles.show');
+    Route::get('/battles/{slug}/map', [BattleController::class, 'map'])->name('battles.map');
+    Route::get('/battles/{slug}/armies', [BattleController::class, 'armies'])->name('battles.armies');
+    Route::get('/battles/{slug}/actions', [BattleController::class, 'actions'])->name('battles.actions');
+    Route::get('/battles/{slug}/options', [BattleController::class, 'options'])->name('battles.options');
+    Route::get('/battles/{slug}/moves', [BattleController::class, 'moves'])->name('battles.moves');
+    Route::post('/battles/{slug}/move', [BattleController::class, 'move'])->name('battles.move');
 
 });
-Route::get('/battles/{slug}', [BattleController::class, 'show'])->name('battles.show');
-Route::get('/battles/{slug}/map', [BattleController::class, 'map'])->name('battles.map');
-Route::get('/battles/{slug}/armies', [BattleController::class, 'armies'])->name('battles.armies');
-Route::get('/battles/{slug}/actions', [BattleController::class, 'actions'])->name('battles.actions');
-Route::get('/battles/{slug}/options', [BattleController::class, 'options'])->name('battles.options');
-Route::get('/battles/{slug}/moves', [BattleController::class, 'moves'])->name('battles.moves');
-Route::post('/battles/{slug}/move', [BattleController::class, 'move'])->name('battles.move');
+
+
+
 
 
 //Route::get('/battles', function () {

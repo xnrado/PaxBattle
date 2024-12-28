@@ -6,7 +6,7 @@
 
     <div class="py-12">
         <div class="flex justify-center max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <livewire:battle-armies-list lazy :slug="$battle->slug"/>
+            <livewire:view-battle-armies-list lazy :battle_id="$battle->id" :editable="true"/>
         </div>
     </div>
 </x-app-layout>

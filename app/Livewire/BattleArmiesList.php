@@ -23,9 +23,12 @@ class BattleArmiesList extends Component
         'active.factions.*.countries.*.user_id' => [
             'min:1'
         ],
-
+        'active.factions.*' => [
+            'min:1'
+        ]
     ], message: [
-        'active.factions.*.countries.*.user_id.min' => 'Żadne państwo nie może być bez gracza. :attribute',
+        'active.factions.*.countries.*.user_id.min' => 'Żadne państwo nie może być bez gracza.',
+        'active.factions.*' => 'Bitwa nie może zostać utworzona w prowincji bez armii'
     ]
     )]
     public $active = array('factions' => [null => []]);

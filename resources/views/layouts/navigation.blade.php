@@ -14,7 +14,7 @@
                     </div>
                     <!--- Drawer component --->
                     <div id="drawer-navigation" class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-nord-0 w-64 rounded-r-2xl border-[1px] border-nord-3 border-l-nord-0" tabindex="-1" aria-labelledby="drawer-navigation-label">
-                        <x-application-logo class="block h-9 w-auto fill-current text-nord-4" />
+                        <x-svg.application-logo class="block h-9 w-auto fill-current text-nord-4" />
                         <button type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" class="text-gray-400 bg-transparent hover:bg-nord-2 hover:text-nord-4 rounded-lg text-sm w-8 h-8 absolute top-4 right-2.5 inline-flex items-center justify-center" >
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
@@ -65,7 +65,7 @@
                     <!-- Logo -->
                     <div class="shrink-0 flex items-center">
                         <a href="{{ route('dashboard') }}">
-                            <x-application-logo class="block h-9 w-auto fill-current text-nord-4" />
+                            <x-svg.application-logo class="block h-9 w-auto fill-current text-nord-4" />
                         </a>
                     </div>
                 </div>
