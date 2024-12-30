@@ -1,5 +1,10 @@
-import { Hex } from "./game-objects"
+import { Hex, GameState, GameConfig } from "./game-objects";
+import { DisplayDriver } from "./display-driver";
 import { CubeVector, Vector } from "./vector";
+
+function elementToScreenCoords(elementP: Vector): Vector {
+    return elementP.mul(window.devicePixelRatio).round();
+}
 
 export const BASE_CONFIG: GameConfig = {
     hexes: [
@@ -17,33 +22,13 @@ export const BASE_CONFIG: GameConfig = {
     ]
 }
 
-export type GameConfig = {
-    hexes: { h: CubeVector; variant: number }[];
-    units: { h: CubeVector; }[];
-};
-
-class GameState {
-    hexes: Map<string, Hex>;
-
-    constructor(config: GameConfig) {
-        this.hexes = new Map(
-            config.hexes.map((h) => [h.h.toString(), { h: h.h, variant: h.variant }]),
-
-        )
-    }
-}
-
-
 export class Game {
     displayDriver: DisplayDriver;
-    drawer: Drawer;
-    displaySettings: DisplaySettings;
 
     constructor(ctx: CanvasRenderingContext2D, config: GameConfig) {
         const gameState = new GameState(config)
 
-        this.displaySettings = new DisplaySettings(ctx);
-        this.drawer = new Drawer(ctx, gameState, this.displaySettings);
+        this.displayDriver = new DisplayDriver(ctx, gameState)
 
         window.addEventListener('resize', () => {
             this.resize();
@@ -58,11 +43,17 @@ export class Game {
         });
     }
 
+    private initEventListeners(canvas: HTMLCanvasElement) {
+        canvas.addEventListener("pointerdown", (e: PointerEvent) => {
+            // const screenP = element
+        })
+    }
+
     private draw() {
-        this.drawer.draw();
+        this.displayDriver.draw();
     };
 
     private resize() {
-        this.displaySettings.resize()
+        this.displayDriver.resize()
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ImageViewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BattleController;
+use App\Http\Middleware\CheckBattleParticipation;
 use App\Models\Province;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\Auth;
@@ -35,28 +36,24 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 
-    Route::get('/battles', function () {
-        return view('battles.index');
-    })->name('battles.index');
-    Route::get('/battles/create', function () {
-        return view('battles.create');
-    })->name('battles.create');
-    Route::post('/battles', [BattleController::class, 'store'])->name('battles.store');
-
     Route::get('/countries', function () {
         return view('countries.index');
     })->name('countries.index');
 
-    Route::get('/images/{img}', [ImageViewController::class, 'img'])->name('images');
-
-    Route::get('/battles/{slug}', [BattleController::class, 'show'])->name('battles.show');
-    Route::get('/battles/{slug}/map', [BattleController::class, 'map'])->name('battles.map');
-    Route::get('/battles/{slug}/armies', [BattleController::class, 'armies'])->name('battles.armies');
-    Route::get('/battles/{slug}/actions', [BattleController::class, 'actions'])->name('battles.actions');
-    Route::get('/battles/{slug}/options', [BattleController::class, 'options'])->name('battles.options');
-    Route::get('/battles/{slug}/moves', [BattleController::class, 'moves'])->name('battles.moves');
-    Route::post('/battles/{slug}/move', [BattleController::class, 'move'])->name('battles.move');
-
+    Route::get('/battles', [BattleController::class, 'index'])->name('battles.index');
+    Route::group(['middleware' => ['can:create_battles']], function () {
+        Route::get('/battles/create', [BattleController::class, 'create'])->name('battles.create');
+        Route::post('/battles', [BattleController::class, 'store'])->name('battles.store');
+    });
+    Route::middleware([CheckBattleParticipation::class])->group(function () {
+        Route::get('/battles/{slug}', [BattleController::class, 'show'])->name('battles.show');
+        Route::get('/battles/{slug}/map', [BattleController::class, 'map'])->name('battles.map');
+        Route::get('/battles/{slug}/armies', [BattleController::class, 'armies'])->name('battles.armies');
+        Route::get('/battles/{slug}/actions', [BattleController::class, 'actions'])->name('battles.actions');
+        Route::get('/battles/{slug}/options', [BattleController::class, 'options'])->name('battles.options');
+        Route::get('/battles/{slug}/moves', [BattleController::class, 'moves'])->name('battles.moves');
+        Route::post('/battles/{slug}/move', [BattleController::class, 'move'])->name('battles.move');
+    });
 });
 
 

@@ -1,6 +1,6 @@
 import './bootstrap';
 import 'flowbite';
-import './battle/map';
+// import './battle/map';
 import './echo';
 import sort from '@alpinejs/sort';
 import collapse from '@alpinejs/collapse';

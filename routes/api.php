@@ -1,16 +1,11 @@
 <?php
 
 use App\Http\Controllers\API\UserController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| These routes are loaded by the RouteServiceProvider within a group which
-| contains the "api" middleware group.
-|
-*/
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:api');
 
 Route::get('/api/users', UserController::class)->name('api.users');

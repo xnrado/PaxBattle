@@ -11,6 +11,14 @@ use Illuminate\View\View;
 
 class BattleController extends Controller
 {
+    public function index(): View
+    {
+        return view('battles.index');
+    }
+    public function create(): View
+    {
+        return view('battles.create');
+    }
     public function show($slug): View
     {
         return view('battles.show', [

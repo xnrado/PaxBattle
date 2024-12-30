@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Jakyeru\Larascord\Traits\InteractsWithDiscord;
+use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, InteractsWithDiscord, HasRoles;
+    use HasFactory, Notifiable, InteractsWithDiscord, HasRoles, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -34,8 +35,7 @@ class User extends Authenticatable
         'locale',
         'mfa_enabled',
         'premium_type',
-        'public_flags',
-        'roles',
+        'public_flags'
     ];
 
     /**
@@ -66,8 +66,7 @@ class User extends Authenticatable
         'locale' => 'string',
         'mfa_enabled' => 'boolean',
         'premium_type' => 'integer',
-        'public_flags' => 'integer',
-        'roles' => 'json',
+        'public_flags' => 'integer'
     ];
 
     public function country(): BelongsTo

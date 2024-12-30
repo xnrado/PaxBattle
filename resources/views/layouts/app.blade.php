@@ -15,6 +15,7 @@
         @livewireStyles
         @wireUiScripts
         @vite(['resources/css/app.css', 'resources/js/app.ts'])
+        @yield('scripts')
     </head>
     <body class="font-sans text-sm antialiased">
         <div class="relative min-h-screen bg-nord-dark">

@@ -1,4 +1,5 @@
-import {CubeVector, Vector} from "./vector";
+import { CubeVector, Vector } from "./vector";
+import { GameState } from "./game-objects"
 
 const SPRITES_IMAGE_SRC = "../../../storage/img/battlefield/terrain.png"
 
@@ -15,8 +16,8 @@ type Orientation = {
 };
 
 type Sprite = {
-    sourceStart: Vector;
-    sourceSize: Vector;
+    start: Vector;
+    size: Vector;
     offset: Vector;
 }
 
@@ -25,91 +26,11 @@ type SpritePreset = {
     hexes: Sprite[];
 }
 
-class Drawer {
+export class DisplayDriver {
     backgroundColor: string = "rgb(50, 50, 50)"
     ctx: CanvasRenderingContext2D;
     gameState: GameState;
-    displaySettings: DisplaySettings;
     terrainSprites: HTMLImageElement;
-
-    constructor(ctx: CanvasRenderingContext2D, gameState: GameState, displaySettings: DisplaySettings) {
-        this.ctx = ctx;
-        this.gameState = gameState;
-        this.displaySettings = displaySettings;
-        this.terrainSprites = new Image();
-        this.terrainSprites.src = SPRITES_IMAGE_SRC;
-    }
-
-    public draw() {
-        this.ctx.fillStyle = this.backgroundColor;
-        this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-
-        this.drawHexes();
-    }
-
-    private drawDebugHexes() {
-        this.ctx.strokeStyle = "white";
-        this.ctx.fillStyle = "red";
-        this.ctx.lineWidth = 2;
-        const hexSize = this.displaySettings.getHexSize()
-
-        // @ts-ignore
-        for (const hex of this.gameState.hexes.values()) {
-            let corners = this.displaySettings.polygonCorners(hex.h)
-            this.ctx.beginPath()
-            for (var i = 0; i < 6; i++) {
-                this.ctx.lineTo(corners[i].x, corners[i].y)
-            }
-            this.ctx.closePath()
-            this.ctx.stroke()
-            let center = this.displaySettings.hexToPixel(hex.h)
-            this.ctx.fillRect(center.x - hexSize.x/2, center.y - hexSize.y/2, 2, 2)
-            console.log(center)
-            console.log(corners)
-            console.log(hexSize)
-        }
-    }
-
-    private drawHexes() {
-        const hexSize = this.displaySettings.getHexSize()
-
-        // @ts-ignore
-        for (const hex of this.gameState.hexes.values()) {
-            console.log(hex)
-            const hexCenter = this.displaySettings.hexToPixel(hex.h)
-            const spriteCords = this.displaySettings.getHexSprite(hex.variant)
-            const start = hexCenter.add(spriteCords.offset)
-            const size = spriteCords.sourceSize;
-            console.log([
-                this.terrainSprites,
-                spriteCords.sourceStart.x,
-                spriteCords.sourceStart.y,
-                spriteCords.sourceSize.x,
-                spriteCords.sourceSize.y,
-                start.x,
-                start.y,
-                size.x,
-                size.y
-            ])
-            this.ctx.drawImage(
-                this.terrainSprites,
-                spriteCords.sourceStart.x,
-                spriteCords.sourceStart.y,
-                spriteCords.sourceSize.x,
-                spriteCords.sourceSize.y,
-                start.x,
-                start.y,
-                size.x,
-                size.y
-            )
-        }
-        this.drawDebugHexes();
-
-    }
-}
-
-class DisplaySettings {
-    ctx: CanvasRenderingContext2D;
     //// Pointy top
     // orientation: Orientation = {
     //     f0: Math.sqrt(3),
@@ -139,15 +60,78 @@ class DisplaySettings {
         hexSize: new Vector(160, 80),
         hexes: [
             {
-                sourceStart: new Vector(558, 11),
-                sourceSize: new Vector(162, 100),
+                start: new Vector(558, 11),
+                size: new Vector(162, 100),
                 offset: new Vector(-81, -50)
             }
         ]
     }
 
-    constructor(ctx: CanvasRenderingContext2D) {
+    constructor(ctx: CanvasRenderingContext2D, gameState: GameState) {
         this.ctx = ctx;
+        this.gameState = gameState;
+        this.terrainSprites = new Image();
+        this.terrainSprites.src = SPRITES_IMAGE_SRC;
+    }
+
+    public draw() {
+        this.ctx.fillStyle = this.backgroundColor;
+        this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+
+        this.drawHexes();
+    }
+
+    private drawDebugHexes() {
+        this.ctx.strokeStyle = "white";
+        this.ctx.fillStyle = "red";
+        this.ctx.lineWidth = 2;
+        const hexSize = this.getHexSize()
+
+        // @ts-ignore
+        for (const hex of this.gameState.hexes.values()) {
+            let corners = this.polygonCorners(hex.h)
+            this.ctx.beginPath()
+            for (var i = 0; i < 6; i++) {
+                this.ctx.lineTo(corners[i].x, corners[i].y)
+            }
+            this.ctx.closePath()
+            this.ctx.stroke()
+            let center = this.hexToPixel(hex.h)
+            this.ctx.fillRect(center.x - hexSize.x/2, center.y - hexSize.y/2, 2, 2)
+            console.log(center)
+            console.log(corners)
+            console.log(hexSize)
+        }
+    }
+
+    private drawSprite(sprite: Sprite, hexCords: CubeVector) {
+        const hexCenter = this.hexToPixel(hexCords)
+        const start = hexCenter.add(sprite.offset)
+        const size = sprite.size;
+        this.ctx.drawImage(
+            this.terrainSprites,
+            sprite.start.x,
+            sprite.start.y,
+            sprite.size.x,
+            sprite.size.y,
+            start.x,
+            start.y,
+            size.x,
+            size.y
+        )
+    }
+
+    private drawHexes() {
+        // @ts-ignore
+        for (const hex of this.gameState.hexes.values()) {
+            const sprite = this.getHexSprite(hex.variant)
+            this.drawSprite(sprite, hex.h)
+        }
+        this.drawDebugHexes();
+    }
+
+    private drawUnits() {
+
     }
 
     public resize() {

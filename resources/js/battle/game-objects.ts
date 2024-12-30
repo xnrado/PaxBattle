@@ -1,10 +1,21 @@
-import {CubeVector, Vector} from "./vector";
-import mariadb = require('mariadb');
+import { CubeVector, Vector } from "./vector";
+// import mariadb = require('mariadb');
 
 
 export type GameConfig = {
-    hexes: { h: CubeVector; terrain_id: number }[];
-    units: { h: CubeVector; }
+    hexes: { h: CubeVector; variant: number }[];
+    units: { h: CubeVector; }[];
+}
+
+export class GameState {
+    hexes: Map<string, Hex>;
+
+    constructor(config: GameConfig) {
+        this.hexes = new Map(
+            config.hexes.map((h) => [h.h.toString(), { h: h.h, variant: h.variant }]),
+
+        )
+    }
 }
 
 export type Hex = {

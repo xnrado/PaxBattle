@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,6 +21,7 @@ class DatabaseSeeder extends Seeder
 //            'email' => 'test@example.com',
 //        ]);
         $this->call(NukeSeeder::class);
+
         $this->call(RegionsTableSeeder::class);
         $this->call(TerrainsTableSeeder::class);
         $this->call(ItemsTableSeeder::class);
@@ -34,5 +36,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ArmiesTableSeeder::class);
         $this->call(UnitsTableSeeder::class);
         $this->call(BattlefieldsTableSeeder::class);
+
+        $this->call(PermissionsSeeder::class);
     }
 }
