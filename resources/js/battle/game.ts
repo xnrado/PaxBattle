@@ -8,14 +8,14 @@ function elementToScreenCoords(elementP: Vector): Vector {
 
 export const BASE_CONFIG: GameConfig = {
     hexes: [
-        { h: new CubeVector(0, 0, 0), variant: 0 },
-        { h: new CubeVector(1, 1, -2), variant: 0 },
-        { h: new CubeVector(2, 3, -5), variant: 0 },
-        { h: new CubeVector(3, 3, -6), variant: 0 },
-        { h: new CubeVector(3, 4, -7), variant: 0 },
-        { h: new CubeVector(4, 3, -7), variant: 0 },
-        { h: new CubeVector(4, 4, -8), variant: 0 },
-        { h: new CubeVector(2, 4, -6), variant: 0 },
+        { h: new CubeVector(0, 0, 0), variant: 0, terrain_id: 1, height: 0 },
+        { h: new CubeVector(1, 1, -2), variant: 0, terrain_id: 1, height: 0 },
+        { h: new CubeVector(2, 3, -5), variant: 0, terrain_id: 1, height: 0 },
+        { h: new CubeVector(3, 3, -6), variant: 0, terrain_id: 1, height: 0 },
+        { h: new CubeVector(3, 4, -7), variant: 0, terrain_id: 1, height: 0 },
+        { h: new CubeVector(4, 3, -7), variant: 0, terrain_id: 1, height: 0 },
+        { h: new CubeVector(4, 4, -8), variant: 0, terrain_id: 1, height: 0 },
+        { h: new CubeVector(2, 4, -6), variant: 0, terrain_id: 1, height: 0 },
     ],
     units: [
         { h: new CubeVector(2, 3, -5),},

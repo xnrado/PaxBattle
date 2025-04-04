@@ -11,12 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('node_variants', function (Blueprint $table) {
+            $table->id();
+
+        });
+
         Schema::create('battlefield_nodes', function (Blueprint $table) {
             $table->integer('q');
             $table->integer('r');
             $table->integer('s');
             $table->foreignId('battle_id')->constrained();
-            $table->foreignId('terrain_id')->constrained();
+            $table->foreignId('node_variant_id');
             $table->unique(['q', 'r', 's', 'battle_id']);
             $table->index(['battle_id']);
             $table->index(['q', 'r', 's', 'battle_id']);

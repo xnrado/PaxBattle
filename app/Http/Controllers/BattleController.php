@@ -5,15 +5,29 @@ namespace App\Http\Controllers;
 use App\Jobs\MakeBattleMove;
 use App\Models\Battle;
 use App\Models\BattleMove;
+use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class BattleController extends Controller
 {
     public function index(): View
     {
         return view('battles.index');
+    }
+    public function image($slug): BinaryFileResponse
+    {
+        $battle = Battle::query()->where('slug', $slug)->first(['image']);
+
+        if (Storage::disk('local')->missing($battle->image)) {
+            abort(404);
+        }
+
+        return Storage::disk('local')->;
     }
     public function create(): View
     {

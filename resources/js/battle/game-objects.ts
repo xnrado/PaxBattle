@@ -3,7 +3,7 @@ import { CubeVector, Vector } from "./vector";
 
 
 export type GameConfig = {
-    hexes: { h: CubeVector; variant: number }[];
+    hexes: { h: CubeVector; variant: number; terrain_id: number; height: number; }[];
     units: { h: CubeVector; }[];
 }
 
@@ -12,15 +12,19 @@ export class GameState {
 
     constructor(config: GameConfig) {
         this.hexes = new Map(
-            config.hexes.map((h) => [h.h.toString(), { h: h.h, variant: h.variant }]),
+            config.hexes.map((h) => [h.h.toString(), { h: h.h, variant: h.variant, terrain_id: h.terrain_id, height: h.height }]),
 
         )
+        console.log(this.hexes)
     }
+
 }
 
 export type Hex = {
     h: CubeVector
     variant: number
+    terrain_id: number
+    height: number
 };
 
 export type UnitTemplate = {

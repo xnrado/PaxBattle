@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
     });
     Route::middleware([CheckBattleParticipation::class])->group(function () {
         Route::get('/battles/{slug}', [BattleController::class, 'show'])->name('battles.show');
+        Route::get('/battles/{slug}/image', [BattleController::class, 'image'])->name('battles.image');
         Route::get('/battles/{slug}/map', [BattleController::class, 'map'])->name('battles.map');
         Route::get('/battles/{slug}/armies', [BattleController::class, 'armies'])->name('battles.armies');
         Route::get('/battles/{slug}/actions', [BattleController::class, 'actions'])->name('battles.actions');
